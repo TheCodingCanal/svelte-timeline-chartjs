@@ -6,6 +6,7 @@
 	import { data } from '../lib/data.js';
 	import 'chartjs-adapter-date-fns';
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
+	import TooltipText from './TooltipText.svelte'
 
 	import {
 		Chart,
@@ -27,7 +28,15 @@
 		indexAxis: 'y',
 		responsive: true,
 		scales: { x: { type: 'time', time: { unit: 'day' }, min: '2022-10-01', max: '2022-10-15' } },
-   plugins: {tooltip: {callbacks: {title: () =>"test"}}}
+    plugins: {
+        tooltip: {
+            callbacks: {
+                title: () =>"test",
+                label: () => {}
+            }
+        }
+
+    }
 	}}
 
 	plugins={[ChartDataLabels]}

@@ -28,5 +28,5 @@
 		responsive: true,
 		scales: { x: { type: 'time', time: { unit: 'day' }, min: '2022-10-01', max: '2022-10-15' } }
 	}}
-	plugins={[ChartDataLabels]}
+
 />

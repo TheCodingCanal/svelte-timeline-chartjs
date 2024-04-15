@@ -26,7 +26,10 @@
 	options={{
 		indexAxis: 'y',
 		responsive: true,
-		scales: { x: { type: 'time', time: { unit: 'day' }, min: '2022-10-01', max: '2022-10-15' } }
+		scales: { x: { type: 'time', time: { unit: 'day' }, min: '2022-10-01', max: '2022-10-15' } },
+   plugins: {tooltip: {callbacks: {title: () =>"test"}}}
 	}}
+
+	plugins={[ChartDataLabels]}
 
 />

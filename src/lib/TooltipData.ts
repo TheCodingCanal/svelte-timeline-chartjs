@@ -1,0 +1,1 @@
+const TooltipData = ["First tooltip.", "Second tooltip.", "Third tooltip"]

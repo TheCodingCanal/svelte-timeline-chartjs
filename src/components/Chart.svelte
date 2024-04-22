@@ -22,7 +22,7 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-
+	let tooltipDataIndex = 0;
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const getOrCreateTooltip = (chart) => {
@@ -47,6 +47,8 @@
 
 	const externalTooltipHandler = (context) => {
 		const {chart, tooltip} = context;
+		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
+
 		const tooltipEl = getOrCreateTooltip(chart);
 
 		if (tooltip.opacity === 0){
@@ -96,5 +98,5 @@
 	plugins={[ChartDataLabels]}
 
 />
-<TooltipText></TooltipText>
+<TooltipText indexB={tooltipDataIndex}></TooltipText>
 

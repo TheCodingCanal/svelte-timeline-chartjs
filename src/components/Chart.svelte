@@ -26,7 +26,7 @@
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const getOrCreateTooltip = (chart) => {
-		let tooltipEl = chart.canvas.parentNode.querySelector("[id='tooltipContents']");
+		let tooltipEl = chart.canvas.parentNode.querySelector('TooltipText');
 
 		if (!tooltipEl) {
 			tooltipEl = document.createElement('div');
@@ -38,8 +38,11 @@
 			tooltipEl.style.position = 'absolute';
 			tooltipEl.style.transform = 'translate(-50%, 0)';
 			tooltipEl.style.transition = 'all .1s ease';
-			tooltipEl.id = "tooltipContents"
-
+			tooltipEl.id = "tooltipContents";
+			let TooltipTextEl = document.getElementById("TooltipText");
+			if(TooltipTextEl) {
+				tooltipEl.appendChild(TooltipTextEl);
+			}
 			chart.canvas.parentNode.appendChild(tooltipEl);
 		}
 		return tooltipEl;
@@ -48,22 +51,13 @@
 	const externalTooltipHandler = (context) => {
 		const {chart, tooltip} = context;
 		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
-
 		const tooltipEl = getOrCreateTooltip(chart);
 
 		if (tooltip.opacity === 0){
 			tooltipEl.style.opacity = 0;
 			return;
 		}
-		while (tooltipEl.firstChild) {
-			tooltipEl.firstChild.remove();
-		}
-		let TooltipTextEl = document.getElementById("TooltipText");
-		let cloneTooltipTextEl;
-		if(TooltipTextEl) {
-			cloneTooltipTextEl = TooltipTextEl.cloneNode(true);
-			tooltipEl.appendChild(cloneTooltipTextEl);
-		}
+
 		const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
 
 		// Display, position, and set styles for font

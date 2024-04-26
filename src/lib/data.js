@@ -42,11 +42,12 @@ export const data = {
 				{
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
-					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count']
+					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
+					tooltip: "fifth"
 				},
-				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235' },
-				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236' },
-				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237' },
+				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: "sixth" },
+				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: "seventh" },
+				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: "eighth" },
 
 			],
 			backgroundColor: [

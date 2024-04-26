@@ -23,10 +23,11 @@
 		LinearScale
 	} from 'chart.js';
 	let tooltipDataIndex = 0;
+	let tooltipDatasetIndex = 0;
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const getOrCreateTooltip = (chart) => {
-		let tooltipEl = chart.canvas.parentNode.querySelector('TooltipText');
+		let tooltipEl = chart.canvas.parentNode.querySelector('#tooltipContents');
 
 		if (!tooltipEl) {
 			tooltipEl = document.createElement('div');
@@ -51,6 +52,7 @@
 	const externalTooltipHandler = (context) => {
 		const {chart, tooltip} = context;
 		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
+		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
 		const tooltipEl = getOrCreateTooltip(chart);
 
 		if (tooltip.opacity === 0){
@@ -92,5 +94,5 @@
 	plugins={[ChartDataLabels]}
 
 />
-<TooltipText indexB={tooltipDataIndex}></TooltipText>
+<TooltipText indexB={tooltipDataIndex} indexA={tooltipDatasetIndex}></TooltipText>
 

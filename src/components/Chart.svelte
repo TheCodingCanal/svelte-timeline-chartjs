@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export const ssr = false;
 	export const csr = true;
 
@@ -22,8 +22,8 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-	let tooltipDataIndex = 0;
-	let tooltipDatasetIndex = 0;
+	let tooltipDataIndex: number = 0;
+	let tooltipDatasetIndex: number = 0;
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const getOrCreateTooltip = (chart) => {
@@ -50,6 +50,7 @@
 	};
 
 	const externalTooltipHandler = (context) => {
+
 		const {chart, tooltip} = context;
 		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
 		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;

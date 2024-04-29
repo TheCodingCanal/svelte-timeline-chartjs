@@ -12,7 +12,7 @@ export const data = {
 					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
 					tooltip: "First."
 				},
-				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: "Second." },
+				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: [["category one", "category two", "category three"], ["info one", "info two", "info three"]]},
 				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: "Third."},
 				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: "Fourth." },
 

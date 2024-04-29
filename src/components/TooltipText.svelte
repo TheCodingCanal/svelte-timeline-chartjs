@@ -1,8 +1,9 @@
-<script >
+<script lang="ts">
+
 import {data} from "$lib/data.js";
 
-export let indexA = 0;
-export let indexB = 0;
+export let indexA: number = 0;
+export let indexB: number = 0;
 console.log(indexB);
 </script>
 

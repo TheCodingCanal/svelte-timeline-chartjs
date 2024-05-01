@@ -10,11 +10,12 @@ export const data = {
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
 					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
-					tooltip: "First."
+					tooltip: [["category", "info"], ["category", "info"]]
 				},
-				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: [["category one", "category two", "category three"], ["info one", "info two", "info three"]]},
-				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: "Third."},
-				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: "Fourth." },
+				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: [["category one", "info one"], ["category two", "info two"]]},
+				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: [["category three", "info three"], ["category four", "info four"]]},
+				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"]] },
+				{ x: ['2022-10-05', '2022-10-12'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"]]}
 
 			],
 			backgroundColor: [
@@ -43,11 +44,13 @@ export const data = {
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
 					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
-					tooltip: "fifth"
+					tooltip: [["category nine", "info one"], ["category two", "info ten"]]
 				},
-				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: "sixth" },
-				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: "seventh" },
-				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: "eighth" },
+				{ x: ['2022-10-08', '2022-10-10'], y: 'Ender', label: 'Job 1235', tooltip: [["category one", "info one"], ["category two", "info two"]] },
+				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: [["category one", "info one"], ["category two", "info two"]] },
+				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: [["category one", "info one"], ["category two", "info two"]] },
+				{ x: ['2022-10-05', '2022-10-12'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"]]},
+				{ x: ['2022-10-12', '2022-10-15'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"]]}
 
 			],
 			backgroundColor: [

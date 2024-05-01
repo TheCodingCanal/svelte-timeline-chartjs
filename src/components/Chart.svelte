@@ -62,13 +62,33 @@
 		}
 
 		const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
+		const screenPadding: number = 500;
 
 		// Display, position, and set styles for font
-		tooltipEl.style.opacity = 1;
-		tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-		tooltipEl.style.top = positionY + tooltip.caretY + 'px';
-		tooltipEl.style.font = tooltip.options.bodyFont.string;
-		tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+		if(tooltip.x < window.outerWidth - screenPadding) {
+			tooltipEl.style.opacity = 1;
+			tooltipEl.style.left = positionX + window.scrollX + tooltip.caretX + 'px';
+			tooltipEl.style.top = positionY + window.scrollY + tooltip.caretY + 'px';
+			// tooltipEl.style.top = tooltip._eventPosition.y + 'px';
+			tooltipEl.style.font = tooltip.options.bodyFont.string;
+			tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+		}
+		// need to figure out better number for screenPadding
+		else if(tooltip.x > window.outerWidth - screenPadding){
+
+			tooltipEl.style.opacity = 1;
+			tooltipEl.style.left = positionX + window.scrollX + tooltip.caretX - tooltipEl.clientWidth + 'px';
+			tooltipEl.style.top = positionY + window.scrollY + tooltip.caretY + 'px';
+			tooltipEl.style.font = tooltip.options.bodyFont.string;
+			tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+		}
+		// else if(tooltip.y > window.outerWidth - screenPadding){
+		// 	tooltipEl.style.opacity = 1;
+		// 	tooltipEl.style.left = positionX + window.scrollX + tooltip.caretX + 'px';
+		// 	tooltipEl.style.top = positionY + window.scrollY + tooltip.caretY - tooltipEl.clientHeight + 'px';
+		// 	tooltipEl.style.font = tooltip.options.bodyFont.string;
+		// 	tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+		// }
 
 
 

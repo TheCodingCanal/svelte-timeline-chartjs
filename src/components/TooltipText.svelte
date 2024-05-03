@@ -29,7 +29,7 @@ console.log(indexB);
     }
 </style>
 
-<div id="TooltipText">
+<div id="TooltipText" style="opacity: 0">
     <table>
         <tbody>
         {#each data.datasets[indexA].data[indexB].tooltip as content}

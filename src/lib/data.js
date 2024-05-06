@@ -50,7 +50,7 @@ export const data = {
 				{ x: ['2022-10-01', '2022-10-05'], y: 'Ankermake', label: 'Job 1236', tooltip: [["category one", "info one"], ["category two", "info two"]] },
 				{ x: ['2022-10-05', '2022-10-12'], y: 'Ankermake', label: 'Job 1237', tooltip: [["category one", "info one"], ["category two", "info two"]] },
 				{ x: ['2022-10-05', '2022-10-12'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"]]},
-				{ x: ['2022-10-12', '2022-10-15'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"]]}
+				{ x: ['2022-10-12', '2022-10-15'], y: 'MakerBot', label: 'Job 1237', tooltip: [["category five", "info six", "third column", "fourth column"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"], ["category seven", "info eight"]]}
 
 			],
 			backgroundColor: [

@@ -4,28 +4,25 @@ import {data} from "$lib/data.js";
 
 export let indexA: number = 0;
 export let indexB: number = 0;
-console.log(indexB);
 
 
 </script>
 
 <style>
     table{
-       border: 1px solid black;
         color: black;
     }
     tr:nth-child(even) {
-        background-color: #D6EEEE;
+        background-color: whitesmoke;
 
     }
     tr:nth-child(odd) {
-        background-color: cornflowerblue;
+        background-color: darkgray;
 
     }
     td{
         padding-left: 15px;
         padding-right: 15px;
-        border-color: red;
     }
 </style>
 

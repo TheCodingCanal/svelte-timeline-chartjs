@@ -2,108 +2,90 @@
 	export const ssr = false;
 	export const csr = true;
 
-	import { Bar } from 'svelte-chartjs';
-	import { data } from '../lib/data.js';
-	import 'chartjs-adapter-date-fns';
-	import ChartDataLabels from 'chartjs-plugin-datalabels';
-	import TooltipText from './TooltipText.svelte';
-
-	const icons = {
-	blockquote: TooltipText,
-	}
-
 	import {
+		BarElement,
+		CategoryScale,
 		Chart,
+		Legend,
 		TimeScale,
 		Title,
 		Tooltip,
-		Legend,
-		BarElement,
-		CategoryScale,
-		LinearScale
+		type TooltipModel
 	} from 'chart.js';
+	import 'chartjs-adapter-date-fns';
+	import ChartDataLabels from 'chartjs-plugin-datalabels';
+	import { Bar } from 'svelte-chartjs';
+	import { data } from '../lib/data';
+	import TooltipText from './TooltipText.svelte';
 	let tooltipDataIndex: number = 0;
 	let tooltipDatasetIndex: number = 0;
+	let tooltipLeft: number = 0;
+	let tooltipTop: number = 0;
+	let tooltipBottom: number = 0;
+	let tooltipOpacity: number = 0;
+
+	const minDateStr = '2022-01-01';
+	const maxDateStr = '2022-12-31';
+	// const minDate = new Date(minDateStr);
+	// const maxDate = new Date(maxDateStr);
+	// const data = generateData(minDate, maxDate);
+
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
-	const getOrCreateTooltip = (chart) => {
-		let tooltipEl = chart.canvas.parentNode.querySelector('#tooltipContents');
+	function externalTooltipHandler(
+		this: TooltipModel<'bar'>,
+		context: { chart: Chart; tooltip: TooltipModel<'bar'> }
+	): void {
+		const { chart, tooltip } = context;
 
-		if (!tooltipEl) {
-			tooltipEl = document.createElement('div');
-			tooltipEl.style.background = 'rgba(0, 0, 0, 0.7)';
-			tooltipEl.style.borderRadius = '3px';
-			tooltipEl.style.color = 'white';
-			tooltipEl.style.opacity = 1;
-			tooltipEl.style.pointerEvents = 'none';
-			tooltipEl.style.position = 'absolute';
-			tooltipEl.style.transform = 'translate(-50%, 0)';
-			tooltipEl.style.transition = 'all .1s ease';
-			tooltipEl.id = "tooltipContents";
-			let tooltipTextEl = document.getElementById("TooltipText");
-
-			if(tooltipTextEl) {
-				tooltipTextEl.style.opacity = 1;
-				tooltipEl.appendChild(tooltipTextEl);
-			}
-			chart.canvas.parentNode.appendChild(tooltipEl);
-		}
-		return tooltipEl;
-	};
-
-	const externalTooltipHandler = (context) => {
-
-		const {chart, tooltip} = context;
-		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
-		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-		const tooltipEl = getOrCreateTooltip(chart);
-
-		if (tooltip.opacity === 0){
-			tooltipEl.style.opacity = 0;
+		if (tooltip.opacity === 0) {
+			tooltipOpacity = 0;
 			return;
 		}
+		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
+		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
+		console.log('bar data', tooltip.$context.tooltipItems[0].element); // bar width should be what we want to center
+		console.log(context);
 
-		const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
+		tooltipOpacity = 1;
+		tooltipLeft = tooltip.caretX;
+		tooltipTop = tooltip.caretY;
+		tooltipBottom = 0;
 
-			tooltipEl.style.opacity = 1;
-			tooltipEl.style.left = positionX + window.scrollX + tooltip.caretX + 'px';
-			tooltipEl.style.top = positionY + window.scrollY + tooltip.caretY + 'px';
-			// tooltipEl.style.top = tooltip._eventPosition.y + 'px';
-			tooltipEl.style.font = tooltip.options.bodyFont.string;
-			tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+		console.log('tooltip.caretY', tooltip.caretY);
 
-			const bounding = tooltipEl.getBoundingClientRect();
-
-		if(tooltip.caretY + bounding.height > window.innerHeight){
-
-			tooltipEl.style.top = positionY + window.scrollY + tooltip.caretY - tooltipEl.clientHeight + 'px';
-
+		console.log('bottom', chart.chartArea.bottom);
+		if (tooltip.caretY > chart.chartArea.bottom / 2) {
+			tooltipTop = 0;
+			tooltipBottom = chart.chartArea.bottom - tooltip.caretY;
 		}
-
-
-
 	}
 </script>
 
-<Bar
-	{data}
-	options={{
-		indexAxis: 'y',
-		responsive: true,
-		scales: { x: { type: 'time', time: { unit: 'day' }, min: '2022-10-01', max: '2022-10-15' } },
-    plugins: {
-        tooltip: {
-			enabled: false,
-			position: 'nearest',
-            external: externalTooltipHandler
-
-        }
-
-    }
-	}}
-
-	plugins={[ChartDataLabels]}
-
-/>
-<TooltipText indexB={tooltipDataIndex} indexA={tooltipDatasetIndex}></TooltipText>
-
+<div style="position: relative;">
+	<Bar
+		{data}
+		options={{
+			indexAxis: 'y',
+			responsive: true,
+			scales: { x: { type: 'time', time: { unit: 'day' }, min: minDateStr, max: maxDateStr } },
+			plugins: {
+				tooltip: {
+					enabled: false,
+					position: 'nearest',
+					external: externalTooltipHandler
+				}
+			}
+		}}
+		plugins={[ChartDataLabels]}
+	/>
+	<TooltipText
+		{data}
+		indexB={tooltipDataIndex}
+		indexA={tooltipDatasetIndex}
+		left={tooltipLeft}
+		top={tooltipTop}
+		bottom={tooltipBottom}
+		opacity={tooltipOpacity}
+	></TooltipText>
+</div>

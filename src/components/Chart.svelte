@@ -64,7 +64,8 @@
 			tooltipBottom = chart.chartArea.bottom - tooltip.caretY;
 		}
 		if(tooltip.caretX > chart.chartArea.right / 2){
-			tooltipRight =  tooltip.caretX;
+			// tooltipRight =  tooltip.caretX;
+			tooltipLeft = tooltip.$context.tooltip.dataPoints[0].element.x - tooltip.$context.tooltip.dataPoints[0].element.width;
 			// tooltipLeft = tooltip.caretX;
 		}
 	}

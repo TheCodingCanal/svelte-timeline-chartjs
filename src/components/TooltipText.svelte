@@ -24,7 +24,7 @@ $: {
         style += `top: ${top}px;`;
     }
     if(right !== 0){
-        style += `right: ${right}px;`;
+        style += `right: ${left}px;`;
         style += 'display: flex; justify-content: flex-end;'
         console.log('right', right);
     }

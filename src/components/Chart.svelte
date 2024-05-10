@@ -38,7 +38,8 @@
 
 		const {chart, tooltip} = context;
 
-
+		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
+		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
 
 		if (tooltip.opacity === 0){
 			tooltipOpacity = 0;
@@ -49,24 +50,27 @@
 		console.log('bar data', tooltip.$context.tooltipItems[0].element); // bar width should be what we want to center
 		console.log(context);
 
-		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
-		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
+
 
 		tooltipOpacity = 1;
 		tooltipLeft = tooltip.caretX;
 		tooltipTop = tooltip.caretY;
 		tooltipBottom = 0;
 		tooltipRight = 0;
-		console.log(tooltip);
+		// console.log(tooltip);
 
 		if (tooltip.caretY > chart.chartArea.bottom / 2) {
 			tooltipTop = 0;
-			tooltipBottom = chart.chartArea.bottom - tooltip.caretY;
+			let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
+			let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
+			tooltipBottom = pageChartDelta + tooltipDelta;
+			// console.log(tooltipBottom, 'chart area bottom', chart.chartArea.bottom, "caretY", tooltip.caretY, "tooltipDelta", tooltipDelta);
 		}
 		if(tooltip.caretX > chart.chartArea.right / 2){
-			// tooltipRight =  tooltip.caretX;
-			tooltipLeft = tooltip.$context.tooltip.dataPoints[0].element.x - tooltip.$context.tooltip.dataPoints[0].element.width;
-			// tooltipLeft = tooltip.caretX;
+			tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
+			tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+			// tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+			console.log("tooltipLeft", tooltipLeft, 'caretX', tooltip.caretX, 'bar width', tooltip.$context.tooltip.dataPoints[0].element.width)
 		}
 	}
 </script>

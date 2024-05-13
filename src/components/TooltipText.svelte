@@ -55,6 +55,7 @@ $: {
 <style>
     table {
         color: black;
+        background-color: rgba(0, 0 , 0, 0.7);
     }
     tr:nth-child(even) {
         background-color: whitesmoke;
@@ -69,7 +70,7 @@ $: {
 
     .tooltip {
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0);
         border-radius: 3px;
         color: white;
         pointer-events: none;

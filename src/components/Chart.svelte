@@ -1,93 +1,89 @@
 <script lang="ts">
-	export const ssr = false;
-	export const csr = true;
+    export const ssr = false;
+    export const csr = true;
 
-	import 'chartjs-adapter-date-fns';
-	import ChartDataLabels from 'chartjs-plugin-datalabels';
-	import { Bar } from 'svelte-chartjs';
-	import { data } from '../lib/data';
-	import TooltipText from './TooltipText.svelte';
-	let tooltipDataIndex: number = 0;
-	let tooltipDatasetIndex: number = 0;
-	let tooltipLeft: number = 0;
-	let tooltipTop: number = 0;
-	let tooltipBottom: number = 0;
-	let tooltipRight: number = 0;
-	let tooltipOpacity: number = 0;
+    import 'chartjs-adapter-date-fns';
+    import ChartDataLabels from 'chartjs-plugin-datalabels';
+    import {Bar} from 'svelte-chartjs';
+    import {data} from '../lib/data';
+    import TooltipText from './TooltipText.svelte';
 
-	const minDateStr = '2022-10-01';
-	const maxDateStr = '2022-10-15';
+    let tooltipDataIndex: number = 0;
+    let tooltipDatasetIndex: number = 0;
+    let tooltipLeft: number = 0;
+    let tooltipTop: number = 0;
+    let tooltipBottom: number = 0;
+    let tooltipRight: number = 0;
+    let tooltipOpacity: number = 0;
 
-	import {
-		BarElement,
-		CategoryScale,
-		Chart,
-		Legend,
-		TimeScale,
-		Title,
-		Tooltip,
-		type TooltipModel
-	} from 'chart.js';
+    const minDateStr = '2022-10-01';
+    const maxDateStr = '2022-10-15';
 
-	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
+    import {
+        BarElement,
+        CategoryScale,
+        Chart,
+        Legend,
+        TimeScale,
+        Title,
+        Tooltip,
+        type TooltipModel
+    } from 'chart.js';
 
-	function externalTooltipHandler(
-			this: TooltipModel<'bar'>,
-			context: { chart: Chart; tooltip: TooltipModel<'bar'> }
-	): void  {
+    Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
-		const {chart, tooltip} = context;
+    function externalTooltipHandler(
+        this: TooltipModel<'bar'>,
+        context: { chart: Chart; tooltip: TooltipModel<'bar'> }
+    ): void {
 
-		if (tooltip.opacity === 0){
-			tooltipOpacity = 0;
-			return;
-		}
+        const {chart, tooltip} = context;
 
-		tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
-		tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-		console.log('bar data', tooltip.$context.tooltipItems[0].element); // bar width should be what we want to center
-		console.log(context);
+        if (tooltip.opacity === 0) {
+            tooltipOpacity = 0;
+            return;
+        }
 
-
-
-		tooltipOpacity = 1;
-		tooltipLeft = tooltip.caretX;
-		tooltipTop = tooltip.caretY;
-		tooltipBottom = 0;
-		tooltipRight = 0;
-		// console.log(tooltip);
-
-		//Flips tooltip up if in bottom half of the page.
-		if (tooltip.caretY > chart.chartArea.bottom / 2) {
-			tooltipTop = 0;
-			let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
-			let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
-			tooltipBottom = pageChartDelta + tooltipDelta;
-			// console.log(tooltipBottom, 'chart area bottom', chart.chartArea.bottom, "caretY", tooltip.caretY, "tooltipDelta", tooltipDelta);
-		}
-		if(tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth/ 4 && tooltip.caretX > chart.chartArea.right / 2){
-			tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-		}
-		//Flips tooltip to left side of bar if in right half of screen.
-		else if(tooltip.caretX > chart.chartArea.right / 2){
-			tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
-			tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-			// console.log("tooltipLeft", tooltipLeft, 'caretX', tooltip.caretX, 'bar width', tooltip.$context.tooltip.dataPoints[0].element.width)
-			console.log("tooltipRight", tooltipRight);
-			console.log("tooltipLeft", tooltipLeft);
-		}
+        tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
+        tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
+        console.log('bar data', tooltip.$context.tooltipItems[0].element); // bar width should be what we want to center
+        console.log(context);
 
 
+        tooltipOpacity = 1;
+        tooltipLeft = tooltip.caretX;
+        tooltipTop = tooltip.caretY;
+        tooltipBottom = 0;
+        tooltipRight = 0;
 
 
+        //Flips tooltip up if in bottom half of the page.
+        if (tooltip.caretY > chart.chartArea.bottom / 2) {
+            tooltipTop = 0;
+            let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
+            let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
+            tooltipBottom = pageChartDelta + tooltipDelta;
+
+        }
+        //Flips tooltip to the left if it is too close to the left hand side of screen.
+        if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2) {
+            tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+        }
+        //Flips tooltip to left side of bar if in right half of screen.
+        else if (tooltip.caretX > chart.chartArea.right / 2) {
+            tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
+            tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
 
 
-	}
+        }
+
+
+    }
 </script>
 
 <Bar
-	{data}
-	options={{
+        {data}
+        options={{
 		indexAxis: 'y',
 		responsive: true,
 		scales: { x: { type: 'time', time: { unit: 'day' }, min: minDateStr, max: maxDateStr } },
@@ -102,17 +98,17 @@
     }
 	}}
 
-	plugins={[ChartDataLabels]}
+        plugins={[ChartDataLabels]}
 
 />
 <TooltipText
-		{data}
-		indexB={tooltipDataIndex}
-		indexA={tooltipDatasetIndex}
-		left={tooltipLeft}
-		top={tooltipTop}
-		bottom={tooltipBottom}
-		opacity={tooltipOpacity}
-		right={tooltipRight}
+        {data}
+        indexB={tooltipDataIndex}
+        indexA={tooltipDatasetIndex}
+        left={tooltipLeft}
+        top={tooltipTop}
+        bottom={tooltipBottom}
+        opacity={tooltipOpacity}
+        right={tooltipRight}
 ></TooltipText>
 

@@ -7,6 +7,7 @@
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
     import TooltipText from './TooltipText.svelte';
+    console.log("initial data", data)
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -46,7 +47,7 @@
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        console.log('bar data', tooltip.$context.tooltipItems[0].element); // bar width should be what we want to center
+        console.log('bar data', tooltip.$context.tooltipItems[0].element);
         console.log(context);
 
 
@@ -103,8 +104,8 @@
 />
 <TooltipText
         {data}
-        indexB={tooltipDataIndex}
-        indexA={tooltipDatasetIndex}
+        tooltipDataIndex={tooltipDataIndex}
+        tooltipDatasetIndex={tooltipDatasetIndex}
         left={tooltipLeft}
         top={tooltipTop}
         bottom={tooltipBottom}

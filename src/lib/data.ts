@@ -8,18 +8,61 @@ export const data = {
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
 					label: 'Job 1234 - Part A 500 total count 98% efficient     300 good count',
-					tooltip: [
-						['category', 'info'],
-						['category', 'info']
-					]
+					tooltip:
+					"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 				},
 				{
 					x: ['2022-10-08', '2022-10-10'],
 					y: 'Ender',
 					label: 'Job 1235',
 					tooltip: [
-						['category one', 'info one'],
-						['category two', 'info two']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -27,8 +70,30 @@ export const data = {
 					y: 'Ankermake',
 					label: 'Job 1236',
 					tooltip: [
-						['category three', 'info three'],
-						['category four', 'info four']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -36,8 +101,30 @@ export const data = {
 					y: 'Ankermake',
 					label: 'Job 1237',
 					tooltip: [
-						['category five', 'info six'],
-						['category seven', 'info eight']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -45,8 +132,35 @@ export const data = {
 					y: 'MakerBot',
 					label: 'Job 1237',
 					tooltip: [
-						['category five', 'info six'],
-						['category seven', 'info eight']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				}
 			],
@@ -77,8 +191,30 @@ export const data = {
 					y: 'Ender',
 					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
 					tooltip: [
-						['category nine', 'info one'],
-						['category two', 'info ten']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -86,8 +222,30 @@ export const data = {
 					y: 'Ender',
 					label: 'Job 1235',
 					tooltip: [
-						['category one', 'info one'],
-						['category two', 'info two']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -95,8 +253,30 @@ export const data = {
 					y: 'Ankermake',
 					label: 'Job 1236',
 					tooltip: [
-						['category one', 'info one'],
-						['category two', 'info two']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -104,8 +284,30 @@ export const data = {
 					y: 'Ankermake',
 					label: 'Job 1237',
 					tooltip: [
-						['category one', 'info one'],
-						['category two', 'info two']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -113,16 +315,30 @@ export const data = {
 					y: 'MakerBot',
 					label: 'Job 1237',
 					tooltip: [
-						['category five', 'info six'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				},
 				{
@@ -130,18 +346,40 @@ export const data = {
 					y: 'MakerBot',
 					label: 'Job 1237',
 					tooltip: [
-						['category five', 'info six', 'third column', 'fourth column'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight'],
-						['category seven', 'info eight']
+						"<style>tr:nth-child(even) {\n" +
+						"  background-color: gray;\n" +
+						"}" +
+						"tr:nth-child(odd) {\n" +
+						"  background-color: darkgray;\n" +
+						"}"+
+						"</style>" +
+						"<table style='background-color: black'>\n" +
+						"  <tr>\n" +
+						"    <th>Company</th>\n" +
+						"    <th>Contact</th>\n" +
+						"    <th>Country</th>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Alfreds Futterkiste</td>\n" +
+						"    <td>Maria Anders</td>\n" +
+						"    <td>Germany</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"  <tr>\n" +
+						"    <td>Centro comercial Moctezuma</td>\n" +
+						"    <td>Francisco Chang</td>\n" +
+						"    <td>Mexico</td>\n" +
+						"  </tr>\n" +
+						"</table>"
 					]
 				}
 			],

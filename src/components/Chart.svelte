@@ -6,6 +6,7 @@
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
+    import {TimeData} from "$lib/TimeData";
     import TooltipText from './TooltipText.svelte';
     console.log("initial data", data)
 
@@ -17,8 +18,8 @@
     let tooltipRight: number = 0;
     let tooltipOpacity: number = 0;
 
-    const minDateStr = '2022-10-01';
-    const maxDateStr = '2022-10-15';
+    const minDateStr = TimeData.min;
+    const maxDateStr = TimeData.max;
 
     import {
         BarElement,
@@ -74,8 +75,6 @@
         else if (tooltip.caretX > chart.chartArea.right / 2) {
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-
-
         }
 
 
@@ -87,7 +86,7 @@
         options={{
 		indexAxis: 'y',
 		responsive: true,
-		scales: { x: { type: 'time', time: { unit: 'day' }, min: minDateStr, max: maxDateStr } },
+    scales: { x: { type: 'time', time: { unit: TimeData.unit }, min: minDateStr, max: maxDateStr, ticks: {stepSize: TimeData.stepSize}} },
     plugins: {
         tooltip: {
 			enabled: false,

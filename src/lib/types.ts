@@ -22,3 +22,10 @@ export interface ChartData {
     labels: string[];
     datasets: Dataset[];
 }
+
+export interface XAxisTime {
+    unit: string;
+    min: string;
+    max: string;
+    stepSize: number;
+}

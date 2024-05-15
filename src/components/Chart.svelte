@@ -7,7 +7,11 @@
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
+<<<<<<< HEAD
     import {DatedTime} from "$lib/TimeData";
+=======
+    import {TimeData} from "$lib/TimeData";
+>>>>>>> a064cbb (wip: x-axis changes betteen day, hour, minutes based on the XAxisTime object. stepSize allows for intervals of fractional hours (15min 10 min...).)
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
@@ -20,6 +24,7 @@
     let tooltipRight: number = 0;
     let tooltipOpacity: number = 0;
 
+<<<<<<< HEAD
     let TimeData: XAxisTime;
 
     export const minDate: Date = DatedTime.min;
@@ -29,6 +34,10 @@
     console.log("maxDateString", maxDateStr, "maxDate", maxDate);
     console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
+=======
+    const minDateStr = TimeData.min;
+    const maxDateStr = TimeData.max;
+>>>>>>> a064cbb (wip: x-axis changes betteen day, hour, minutes based on the XAxisTime object. stepSize allows for intervals of fractional hours (15min 10 min...).)
 
     import {
         BarElement,

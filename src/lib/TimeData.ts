@@ -16,9 +16,9 @@ import type {XAxisTime} from "$lib/types";
 
 export const TimeData:XAxisTime ={
     unit: "minute",
-    min: "2022-10-01T12:00",
-    max: "2022-10-01T13:00",
-    stepSize: 1
+    min: "2022-10-01T11:00",
+    max: "2022-10-01T12:00",
+    stepSize: 15
 
 >>>>>>> a064cbb (wip: x-axis changes betteen day, hour, minutes based on the XAxisTime object. stepSize allows for intervals of fractional hours (15min 10 min...).)
 }

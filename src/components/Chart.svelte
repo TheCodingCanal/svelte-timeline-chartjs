@@ -18,8 +18,8 @@
     let tooltipRight: number = 0;
     let tooltipOpacity: number = 0;
 
-    const minDateStr = TimeData.min;
-    const maxDateStr = TimeData.max;
+    const minDateStr: string = TimeData.min;
+    const maxDateStr: string = TimeData.max;
 
     import {
         BarElement,

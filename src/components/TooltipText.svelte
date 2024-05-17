@@ -1,16 +1,15 @@
 <script lang="ts">
     import type {ChartData} from '$lib/types';
 
-    import type {TimelineChartData} from '$lib/types';
 
     export let data: ChartData;
     export let tooltipDataIndex: number = 0;
     export let tooltipDatasetIndex: number = 0;
-    export let left = 0;
-    export let top = 0;
-    export let bottom = 0;
-    export let right = 0;
-    export let opacity = 0;
+    export let left: number = 0;
+    export let top: number = 0;
+    export let bottom: number = 0;
+    export let right: number = 0;
+    export let opacity: number = 0;
 
     let style: string;
 

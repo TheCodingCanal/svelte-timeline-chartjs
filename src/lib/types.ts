@@ -24,7 +24,6 @@ export interface ChartData {
 }
 
 export interface XAxisTime {
-<<<<<<< HEAD
     unit: Unit;
     min: Date;
     max: Date;
@@ -37,10 +36,3 @@ export interface DateTime{
 }
 
 export type Unit = false| "millisecond"| "second"| "minute" | "hour" | "day" | "week" | "month" | "quarter" | "year" | undefined
-=======
-    unit: string;
-    min: string;
-    max: string;
-    stepSize: number;
-}
->>>>>>> a064cbb (wip: x-axis changes betteen day, hour, minutes based on the XAxisTime object. stepSize allows for intervals of fractional hours (15min 10 min...).)

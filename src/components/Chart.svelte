@@ -105,6 +105,9 @@ console.log(DateTime);
 			position: 'nearest',
             external: externalTooltipHandler
 
+        },
+        datalabels:{
+            clamp: true,
         }
 
     }

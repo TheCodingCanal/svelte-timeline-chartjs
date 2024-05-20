@@ -10,5 +10,5 @@ export const TimeData:XAxisTime ={
 
 export const DateTime: DateTime ={
     min: new Date("2022-10-01T12:00"),
-    max: new Date("2022-10-01T18:00"),
+    max: new Date("2022-10-01T13:00"),
 }

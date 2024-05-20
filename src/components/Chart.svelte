@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type {XAxisTime} from "$lib/types";
+
     export const ssr = false;
     export const csr = true;
 
@@ -6,9 +8,10 @@
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
-    import {TimeData} from "$lib/TimeData";
+    import {DateTime} from "$lib/TimeData";
     import TooltipText from './TooltipText.svelte';
-    console.log("initial data", data)
+    import {XAxisAdjustment} from "$lib/TimeLogic";
+
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -18,8 +21,13 @@
     let tooltipRight: number = 0;
     let tooltipOpacity: number = 0;
 
-    const minDateStr: string = TimeData.min;
-    const maxDateStr: string = TimeData.max;
+    let TimeData: XAxisTime;
+
+    export const minDateStr: string = DateTime.min;
+    export const maxDateStr: string = DateTime.max;
+console.log(DateTime);
+    $: TimeData = XAxisAdjustment(DateTime);
+
 
     import {
         BarElement,
@@ -48,8 +56,8 @@
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        console.log('bar data', tooltip.$context.tooltipItems[0].element);
-        console.log(context);
+        // console.log('bar data', tooltip.$context.tooltipItems[0].element);
+        // console.log(context);
 
 
         tooltipOpacity = 1;

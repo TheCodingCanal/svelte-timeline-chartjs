@@ -25,7 +25,12 @@ export interface ChartData {
 
 export interface XAxisTime {
     unit: string;
-    min: string;
-    max: string;
+    min: Date;
+    max: Date;
     stepSize: number;
+}
+
+export interface DateTime{
+    min: Date;
+    max: Date;
 }

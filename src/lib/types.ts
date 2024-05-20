@@ -24,7 +24,7 @@ export interface ChartData {
 }
 
 export interface XAxisTime {
-    unit: string;
+    unit: Unit;
     min: Date;
     max: Date;
     stepSize: number;
@@ -34,3 +34,5 @@ export interface DateTime{
     min: Date;
     max: Date;
 }
+
+export type Unit = false| "millisecond"| "second"| "minute" | "hour" | "day" | "week" | "month" | "quarter" | "year" | undefined

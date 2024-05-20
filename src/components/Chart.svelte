@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {XAxisTime} from "$lib/types";
+
 
     export const ssr = false;
     export const csr = true;
@@ -11,6 +11,7 @@
     import {DateTime} from "$lib/TimeData";
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
+    import type {XAxisTime} from "$lib/types";
 
 
     let tooltipDataIndex: number = 0;
@@ -23,8 +24,11 @@
 
     let TimeData: XAxisTime;
 
-    export const minDateStr: string = DateTime.min;
-    export const maxDateStr: string = DateTime.max;
+    export const minDate: Date = DateTime.min;
+    export const maxDate: Date = DateTime.max;
+    export const minDateStr: string = minDate.toISOString();
+    export const maxDateStr: string = maxDate.toISOString();
+    console.log("maxDateString", maxDateStr, "maxDate", maxDate);
 console.log(DateTime);
     $: TimeData = XAxisAdjustment(DateTime);
 

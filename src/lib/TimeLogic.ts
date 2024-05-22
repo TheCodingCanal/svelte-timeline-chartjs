@@ -14,12 +14,12 @@ function differenceBettweenDates(timeInfo: DateTime){
 }
 const XAxis: XAxisTime = {};
 export function XAxisAdjustment(timeInfo: DateTime): XAxisTime{
-    console.log("samp-le");
+
    const timespan: number = differenceBettweenDates(timeInfo);
 
    XAxis.min = timeInfo.min;
    XAxis.max = timeInfo.max;
-console.log("XAxis.max",XAxis.max)
+
    if(timespan < 2){
        XAxis.unit = "minute";
        XAxis.stepSize = 15;

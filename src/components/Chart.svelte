@@ -8,7 +8,7 @@
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
-    import {DateTime} from "$lib/TimeData";
+    import {DatedTime} from "$lib/TimeData";
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
@@ -24,13 +24,13 @@
 
     let TimeData: XAxisTime;
 
-    export const minDate: Date = DateTime.min;
-    export const maxDate: Date = DateTime.max;
+    export const minDate: Date = DatedTime.min;
+    export const maxDate: Date = DatedTime.max;
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
     console.log("maxDateString", maxDateStr, "maxDate", maxDate);
-console.log(DateTime);
-    $: TimeData = XAxisAdjustment(DateTime);
+console.log(DatedTime);
+    $: TimeData = XAxisAdjustment(DatedTime);
 
 
     import {

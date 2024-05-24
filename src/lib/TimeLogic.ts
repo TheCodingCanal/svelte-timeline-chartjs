@@ -1,7 +1,7 @@
 // import {TimeData} from "$lib/TimeData";
 import type {DateTime, XAxisTime} from "$lib/types";
 
-const XAxis: XAxisTime = {};
+
 
 function differenceBettweenDates(timeInfo: DateTime) {
     const timeMax: Date = timeInfo.max;
@@ -16,9 +16,13 @@ function differenceBettweenDates(timeInfo: DateTime) {
 export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
 
     const timespan: number = differenceBettweenDates(timeInfo);
+    const XAxis: XAxisTime = {
+        min : timeInfo.min,
+        max : timeInfo.max,
+        unit : "day",
+        stepSize : 1,
 
-    XAxis.min = timeInfo.min;
-    XAxis.max = timeInfo.max;
+    };
 
     if (timespan < 2) {
         XAxis.unit = "minute";
@@ -40,8 +44,7 @@ export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
         XAxis.stepSize = 1;
         return XAxis;
     }
-    XAxis.unit = "day";
-    XAxis.stepSize = 1;
+
     return XAxis;
     console.log(timespan)
 }

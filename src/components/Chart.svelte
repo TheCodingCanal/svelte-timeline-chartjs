@@ -104,10 +104,11 @@ console.log(DatedTime);
 			enabled: false,
 			position: 'nearest',
             external: externalTooltipHandler
-
         },
         datalabels:{
             clamp: true,
+            textAlign: 'center',
+            display: 'auto'
         }
 
     }

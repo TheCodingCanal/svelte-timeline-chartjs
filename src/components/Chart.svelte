@@ -77,16 +77,18 @@ console.log(DatedTime);
             let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
             let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
             tooltipBottom = pageChartDelta + tooltipDelta;
-
         }
         //Flips tooltip to the left if it is too close to the left hand side of screen.
-        if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2) {
+        if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2 ) {
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
         //Flips tooltip to left side of bar if in right half of screen.
-        else if (tooltip.caretX > chart.chartArea.right / 2) {
+        else if (tooltip.caretX > chart.chartArea.right / 2 && tooltip.caretX < window.innerWidth) {
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+        }
+        if(tooltip.$context.tooltip.dataPoints[0].element.base < chart.chartArea.left){
+            tooltipLeft = 50;
         }
 
 

@@ -1,3 +1,7 @@
+export interface TooltipData {
+    [key: string]: string;
+}
+
 export interface TimelineChartData {
     x: [string, string];
     y: string;

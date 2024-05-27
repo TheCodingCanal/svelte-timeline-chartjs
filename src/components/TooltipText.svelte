@@ -1,8 +1,6 @@
 <script lang="ts">
     import type {ChartData} from '$lib/types';
 
-    import type {ChartData} from '$lib/types';
-
     export let data: ChartData;
     export let indexA: number = 0;
     export let indexB: number = 0;
@@ -30,10 +28,6 @@
             style += 'display: flex; justify-content: flex-end;'
             console.log('right', right);
         }
-        // if(right == 0){
-        //     style += `left: ${left}px;`;
-        //     console.log(left);
-        // }
     }
 
     $: console.log({top, bottom, opacity, style});

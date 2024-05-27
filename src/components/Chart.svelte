@@ -50,13 +50,11 @@
         console.log('bar data', tooltip.$context.tooltipItems[0].element);
         console.log(context);
 
-
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
         tooltipTop = tooltip.caretY;
         tooltipBottom = 0;
         tooltipRight = 0;
-
 
         //Flips tooltip up if in bottom half of the page.
         if (tooltip.caretY > chart.chartArea.bottom / 2) {
@@ -64,7 +62,6 @@
             let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
             let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
             tooltipBottom = pageChartDelta + tooltipDelta;
-
         }
         //Flips tooltip to the left if it is too close to the left hand side of screen.
         if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2) {
@@ -74,11 +71,7 @@
         else if (tooltip.caretX > chart.chartArea.right / 2) {
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-
-
         }
-
-
     }
 </script>
 

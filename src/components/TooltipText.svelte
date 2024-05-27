@@ -1,8 +1,6 @@
 <script lang="ts">
     import type {ChartData} from '$lib/types';
 
-    import type {TimelineChartData} from '$lib/types';
-
     export let data: ChartData;
     export let tooltipDataIndex: number = 0;
     export let tooltipDatasetIndex: number = 0;
@@ -13,8 +11,7 @@
     export let opacity = 0;
 
     let style: string;
-
-
+    
     $: {
         style = `left: ${left}px; opacity: ${opacity};`;
         // style = ` opacity: ${opacity};`;

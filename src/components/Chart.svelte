@@ -1,6 +1,5 @@
 <script lang="ts">
 
-
     export const ssr = false;
     export const csr = true;
 
@@ -12,7 +11,6 @@
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
-
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -29,9 +27,8 @@
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
     console.log("maxDateString", maxDateStr, "maxDate", maxDate);
-console.log(DatedTime);
+    console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
-
 
     import {
         BarElement,
@@ -99,12 +96,9 @@ console.log(DatedTime);
 			enabled: false,
 			position: 'nearest',
             external: externalTooltipHandler
-
         }
-
     }
 	}}
-
         plugins={[ChartDataLabels]}
 
 />

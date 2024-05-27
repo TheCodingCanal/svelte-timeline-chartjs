@@ -1,10 +1,6 @@
 <script lang="ts">
     import type {ChartData} from '$lib/types';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ddcd271 (wip/changed the values on the x-axis so that the labels on the bars do not show)
     export let data: ChartData;
     export let tooltipDataIndex: number = 0;
     export let tooltipDatasetIndex: number = 0;

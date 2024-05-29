@@ -87,8 +87,14 @@ console.log(DatedTime);
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
-        if(tooltip.$context.tooltip.dataPoints[0].element.base < chart.chartArea.left){
-            tooltipLeft = 50;
+        //When bar goes off of the left side of the screen tooltips left side will align with chart left.
+        if(tooltip.$context.tooltip.dataPoints[0].element.base <= chart.chartArea.left){
+            tooltipLeft = chart.chartArea.left;
+        }
+        //When bar goes off of the right side of the screen the tooltip will flip to the left side.
+        else if (tooltip.caretX >= chart.chartArea.right){
+            tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
+            tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
 
 

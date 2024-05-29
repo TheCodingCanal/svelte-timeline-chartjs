@@ -1,8 +1,6 @@
 // import {TimeData} from "$lib/TimeData";
 import type {DateTime, XAxisTime} from "$lib/types";
 
-
-
 function differenceBettweenDates(timeInfo: DateTime) {
     const timeMax: Date = timeInfo.max;
     const timeMin: Date = timeInfo.min;
@@ -21,7 +19,6 @@ export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
         max : timeInfo.max,
         unit : "day",
         stepSize : 1,
-
     };
 
     if (timespan < 2) {

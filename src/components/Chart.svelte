@@ -1,6 +1,5 @@
 <script lang="ts">
 
-
     export const ssr = false;
     export const csr = true;
 
@@ -12,7 +11,6 @@
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
-
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -60,9 +58,6 @@ console.log(DatedTime);
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        // console.log('bar data', tooltip.$context.tooltipItems[0].element);
-        // console.log(context);
-
 
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
@@ -70,14 +65,12 @@ console.log(DatedTime);
         tooltipBottom = 0;
         tooltipRight = 0;
 
-
         //Flips tooltip up if in bottom half of the page.
         if (tooltip.caretY > chart.chartArea.bottom / 2) {
             tooltipTop = 0;
             let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
             let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
             tooltipBottom = pageChartDelta + tooltipDelta;
-
         }
         //Flips tooltip to the left if it is too close to the left hand side of screen.
         if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2) {
@@ -88,8 +81,11 @@ console.log(DatedTime);
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
+    }
 
-
+    function updateLabel(chart){
+        chart.data.datasets.data.label = "this is a test"
+        chart.update();
     }
 </script>
 
@@ -109,8 +105,7 @@ console.log(DatedTime);
             clamp: true,
             textAlign: 'center',
             display: 'auto'
-        }
-
+        },
     }
 	}}
 

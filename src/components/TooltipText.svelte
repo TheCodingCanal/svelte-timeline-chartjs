@@ -27,7 +27,6 @@
             style += 'display: flex; justify-content: flex-end;'
             console.log('right', right);
         }
-
     }
 
 </script>

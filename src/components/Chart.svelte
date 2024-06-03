@@ -96,6 +96,10 @@
 			enabled: false,
 			position: 'nearest',
             external: externalTooltipHandler
+
+        },
+        datalabels:{
+            clamp: true,
         }
     }
 	}}

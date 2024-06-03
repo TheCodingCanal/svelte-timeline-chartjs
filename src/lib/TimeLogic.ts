@@ -1,18 +1,18 @@
-import type {DateTime, XAxisTime} from "$lib/types";
+import type {DateRange, XAxisTime} from "$lib/types";
 
-function differenceBettweenDates(timeInfo: DateTime) {
+function differenceBetweenDatesHours(timeInfo: DateRange) {
     const timeMax: Date = timeInfo.max;
     const timeMin: Date = timeInfo.min;
-    const timeDifference: number = timeMax.getTime() - timeMin.getTime();
+    const timeDifferenceMilliseconds: number = timeMax.getTime() - timeMin.getTime();
     console.log(timeInfo.min);
     console.log(timeMax.getTime() - timeMin.getTime());
-    const timeDifferenceHours: number = timeDifference / (60000 * 60);
+    const timeDifferenceHours: number = timeDifferenceMilliseconds / (60000 * 60);
     return timeDifferenceHours;
 }
 
-export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
+export function XAxisAdjustment(timeInfo: DateRange): XAxisTime {
 
-    const timespan: number = differenceBettweenDates(timeInfo);
+    const timespan: number = differenceBetweenDatesHours(timeInfo);
     const XAxis: XAxisTime = {
         min: timeInfo.min,
         max: timeInfo.max,

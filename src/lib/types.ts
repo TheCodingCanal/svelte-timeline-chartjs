@@ -26,7 +26,7 @@ export interface XAxisTime {
     stepSize: number;
 }
 
-export interface DateTime{
+export interface DateRange{
     min: Date;
     max: Date;
 }

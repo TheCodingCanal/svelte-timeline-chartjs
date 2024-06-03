@@ -26,8 +26,6 @@
     export const maxDate: Date = DatedTime.max;
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
-    console.log("maxDateString", maxDateStr, "maxDate", maxDate);
-console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
 
 
@@ -83,8 +81,11 @@ console.log(DatedTime);
         }
     }
 
-    function updateLabel(chart){
-        chart.data.datasets.data.label = "this is a test"
+    function updateLabel(chart: Chart){
+        if(chart) {
+            chart.data.datasets[0].data[0].label = "this is a test";
+        }
+        console.log(chart);
         chart.update();
     }
 </script>
@@ -94,6 +95,11 @@ console.log(DatedTime);
         options={{
 		indexAxis: 'y',
 		responsive: true,
+   animation: {
+      onComplete: function(callbackInfo) {
+         if (callbackInfo.initial) {updateLabel(callbackInfo.chart);}
+      }
+   },
     scales: { x: { type: 'time', time: { unit: TimeData.unit }, min: minDateStr, max: maxDateStr, ticks: {stepSize: TimeData.stepSize}} },
     plugins: {
         tooltip: {

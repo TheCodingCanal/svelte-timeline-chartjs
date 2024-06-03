@@ -1,4 +1,5 @@
 <script lang="ts">
+
     export const ssr = false;
     export const csr = true;
 
@@ -6,8 +7,10 @@
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
     import {data} from '../lib/data';
+    import {DatedTime} from "$lib/TimeData";
     import TooltipText from './TooltipText.svelte';
-    console.log("initial data", data)
+    import {XAxisAdjustment} from "$lib/TimeLogic";
+    import type {XAxisTime} from "$lib/types";
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -17,8 +20,15 @@
     let tooltipRight: number = 0;
     let tooltipOpacity: number = 0;
 
-    const minDateStr = '2022-10-01';
-    const maxDateStr = '2022-10-15';
+    let TimeData: XAxisTime;
+
+    export const minDate: Date = DatedTime.min;
+    export const maxDate: Date = DatedTime.max;
+    export const minDateStr: string = minDate.toISOString();
+    export const maxDateStr: string = maxDate.toISOString();
+    console.log("maxDateString", maxDateStr, "maxDate", maxDate);
+    console.log(DatedTime);
+    $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
         BarElement,
@@ -47,8 +57,8 @@
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        console.log('bar data', tooltip.$context.tooltipItems[0].element);
-        console.log(context);
+        // console.log('bar data', tooltip.$context.tooltipItems[0].element);
+        // console.log(context);
 
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
@@ -80,18 +90,19 @@
         options={{
 		indexAxis: 'y',
 		responsive: true,
-		scales: { x: { type: 'time', time: { unit: 'day' }, min: minDateStr, max: maxDateStr } },
+    scales: { x: { type: 'time', time: { unit: TimeData.unit }, min: minDateStr, max: maxDateStr, ticks: {stepSize: TimeData.stepSize}} },
     plugins: {
         tooltip: {
 			enabled: false,
 			position: 'nearest',
             external: externalTooltipHandler
 
+        },
+        datalabels:{
+            clamp: true,
         }
-
     }
 	}}
-
         plugins={[ChartDataLabels]}
 
 />

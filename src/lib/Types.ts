@@ -6,7 +6,7 @@ export interface TimelineChartData {
     x: [string, string];
     y: string;
     label: string;
-    tooltip: TooltipData[];
+    tooltip: string;
 }
 
 export interface Dataset {

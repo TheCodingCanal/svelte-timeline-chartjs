@@ -26,8 +26,6 @@
     export const maxDate: Date = DatedTime.max;
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
-    console.log("maxDateString", maxDateStr, "maxDate", maxDate);
-console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
@@ -57,8 +55,6 @@ console.log(DatedTime);
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        // console.log('bar data', tooltip.$context.tooltipItems[0].element);
-        // console.log(context);
 
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
@@ -74,7 +70,7 @@ console.log(DatedTime);
             tooltipBottom = pageChartDelta + tooltipDelta;
         }
         //Flips tooltip to the left if it is too close to the left hand side of screen.
-        if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2 ) {
+        if (tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width < window.innerWidth / 4 && tooltip.caretX > chart.chartArea.right / 2) {
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
         //Flips tooltip to left side of bar if in right half of screen.
@@ -83,11 +79,11 @@ console.log(DatedTime);
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
         //When bar goes off of the left side of the screen tooltips left side will align with chart left.
-        if(tooltip.$context.tooltip.dataPoints[0].element.base <= chart.chartArea.left){
+        if (tooltip.$context.tooltip.dataPoints[0].element.base <= chart.chartArea.left) {
             tooltipLeft = chart.chartArea.left;
         }
         //When bar goes off of the right side of the screen the tooltip will flip to the left side.
-        else if (tooltip.caretX >= chart.chartArea.right){
+        else if (tooltip.caretX >= chart.chartArea.right) {
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }

@@ -1,7 +1,3 @@
-export interface TooltipData {
-    [key: string]: string;
-}
-
 export interface TimelineChartData {
     x: [string, string];
     y: string;
@@ -30,7 +26,7 @@ export interface XAxisTime {
     stepSize: number;
 }
 
-export interface DateTime{
+export interface DateRange{
     min: Date;
     max: Date;
 }

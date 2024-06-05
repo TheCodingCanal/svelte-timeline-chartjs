@@ -83,9 +83,14 @@
 
     function updateLabel(chart: Chart){
         if(chart) {
-            chart.data.datasets[0].data[0].label = "this is a test";
+            for(let datasetIndex: number = 0; datasetIndex < chart.data.datasets.length; datasetIndex++){
+                for(let dataIndex: number = 0; dataIndex < chart.data.datasets[datasetIndex].data.length; dataIndex++){
+                    // chart.data.datasets[datasetIndex].data[dataIndex].label = "this is a test";
+                    
+                }
+            }
+            // chart.data.datasets[0].data[0].label = "this is a test";
         }
-        console.log(chart);
         chart.update();
     }
 </script>
@@ -96,6 +101,7 @@
 		indexAxis: 'y',
 		responsive: true,
    animation: {
+            //need type for callbackInfo
       onComplete: function(callbackInfo) {
          if (callbackInfo.initial) {updateLabel(callbackInfo.chart);}
       }

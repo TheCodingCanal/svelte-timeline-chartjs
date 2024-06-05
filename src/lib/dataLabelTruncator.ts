@@ -1,0 +1,3 @@
+function TextWidth (text: string){
+
+}

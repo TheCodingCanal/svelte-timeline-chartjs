@@ -1,6 +1,5 @@
 <script lang="ts">
 
-
     export const ssr = false;
     export const csr = true;
 
@@ -12,7 +11,6 @@
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
-
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -31,7 +29,6 @@
     console.log("maxDateString", maxDateStr, "maxDate", maxDate);
 console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
-
 
     import {
         BarElement,
@@ -63,13 +60,11 @@ console.log(DatedTime);
         // console.log('bar data', tooltip.$context.tooltipItems[0].element);
         // console.log(context);
 
-
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
         tooltipTop = tooltip.caretY;
         tooltipBottom = 0;
         tooltipRight = 0;
-
 
         //Flips tooltip up if in bottom half of the page.
         if (tooltip.caretY > chart.chartArea.bottom / 2) {
@@ -96,8 +91,6 @@ console.log(DatedTime);
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
-
-
     }
 </script>
 
@@ -118,10 +111,8 @@ console.log(DatedTime);
             textAlign: 'center',
             display: 'auto'
         }
-
     }
 	}}
-
         plugins={[ChartDataLabels]}
 
 />

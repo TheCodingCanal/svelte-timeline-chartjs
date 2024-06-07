@@ -3,16 +3,24 @@ const textWidthCache: Record<string, number> ={};
 export function formatText(text: string, barWidth: number) :string{
     const textByLine: string[] = text.toString().split('/n');
 
+
     let result: string = "";
     for(const line of textByLine)
    {
+
        let totalSize: number = 0;
        for(const character of line) {
            if ((totalSize += textWidth(character)) > barWidth) {
                break;
            }
+           if(text.startsWith("Job 1235")){
+               console.log(result, totalSize)
+           }
            result += character;
        }
+          if(text.startsWith("Job 1235")){
+              console.log(result, totalSize)
+          }
            result += "\n"
        }
     return result;
@@ -37,7 +45,6 @@ function charWidth (char: string) :number{
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     if(context) {
-
         const width = context.measureText(char).width;
         textWidthCache[char] = width;
     }

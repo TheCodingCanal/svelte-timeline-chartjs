@@ -21,7 +21,7 @@ export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
         stepSize : 1,
     };
 
-    if (timespan < 2) {
+    if (timespan <= 2) {
         XAxis.unit = "minute";
         XAxis.stepSize = 15;
         return XAxis;

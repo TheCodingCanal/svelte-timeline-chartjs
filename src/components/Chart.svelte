@@ -89,12 +89,32 @@
             for(let datasetIndex: number = 0; datasetIndex < chart.data.datasets.length; datasetIndex++){
                 for(let dataIndex: number = 0; dataIndex < chart.data.datasets[datasetIndex].data.length; dataIndex++){
                     // chart.data.datasets[datasetIndex].data[dataIndex].label = "this is a test";
-                    if(chart.data.datasets[datasetIndex].data[dataIndex].label) {
-                        let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
+                    if(chart.data.datasets[datasetIndex].data[dataIndex].label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
                         const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
-                        chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(dataLabelString, barWidth);
+
+                        //need to figure out the type for barData
+
+                        const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex];
+                        let shownBarWidth: number = barData.width;
+                        //The bar is off both sides of the screen.
+                        if((barData.x - barData.width) < chart.chartArea.left && (barData.x) > chart.chartArea.right){
+                            shownBarWidth = barWidth - ((barData.x + barData.width) - chart.chartArea.right) - (chart.chartArea.left - (barData.x));
+                            console.log(shownBarWidth, chart.chartArea.right - chart.chartArea.left)
+                        }
+                        //bar is off the right side of the screen.
+                        else if((barData.x) > chart.chartArea.right){
+                            // shownBarWidth = 50;
+                            shownBarWidth = barWidth - ((barData.x) - chart.chartArea.right);
+                        }
+                        //bar is off the left side of the screen.
+                        else if((barData.x - barData.width) < chart.chartArea.left){
+                            // shownBarWidth = 50;
+                            shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barData.width));
+                        }
+
+                        let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
+                        chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(dataLabelString, shownBarWidth);
                     }
-                    
                 }
             }
             // chart.data.datasets[0].data[0].label = "this is a test";

@@ -38,7 +38,7 @@ export const data = {
 				{
 					x: ['2022-10-08', '2022-10-10'],
 					y: 'Ender',
-					label: 'Job 1235\nThis is a new line of information. \nStill testing making more than one line.',
+					label: 'Job 1235\nThis is a new line of information. This is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lThis is a new line of information. lljhjhkjhksajhkjhkdfjhkjhkad jhkdfjhjhafhjfda sjhkjhkfdsjhkfdsjhkjhlkfdsjkhdfshjj ksdfhajkhdfsa jkhladfsjhkadfsjkh jkhfdsakj hladfsjhkadfksjhl \nStill testing making more than one line.',
 					tooltip: [
 						"<style>tr:nth-child(even) {\n" +
 						"  background-color: gray;\n" +
@@ -190,7 +190,7 @@ export const data = {
 				{
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
-					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count\nThis is a new line of information. \nStill testing making more than one line.'],
+					label: 'Job 1234 - Part A\n500 total count\n98% efficient     300 good count\nThis is a new line of information. \nStill testing making more than one line.',
 					tooltip: [
 						"<style>tr:nth-child(even) {\n" +
 						"  background-color: gray;\n" +

@@ -144,7 +144,12 @@
         datalabels:{
             clamp: true,
             textAlign: 'center',
-            display: 'auto'
+            display: 'auto',
+            font: {
+                family: "Arial",
+                size: 12,
+                style: "normal"
+            }
         },
     }
 	}}

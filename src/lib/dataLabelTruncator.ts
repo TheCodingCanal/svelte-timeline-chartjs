@@ -1,26 +1,26 @@
 const textWidthCache: Record<string, number> ={};
 
 export function formatText(text: string, barWidth: number) :string{
-    const textByLine: string[] = text.toString().split('/n');
-
+    const textString: string = text.toString();
+    const textByLine: string[] = textString.split('\n');
+console.log(textByLine);
 
     let result: string = "";
     for(const line of textByLine)
    {
 
        let totalSize: number = 0;
+       console.log(totalSize);
        for(const character of line) {
-           if ((totalSize += textWidth(character)) > barWidth) {
+           if ((totalSize += textWidth(character)) >= barWidth) {
                break;
            }
-           if(text.startsWith("Job 1235")){
+           if(text.startsWith("Job 1236")){
                console.log(result, totalSize)
            }
            result += character;
        }
-          if(text.startsWith("Job 1235")){
-              console.log(result, totalSize)
-          }
+
            result += "\n"
        }
     return result;
@@ -39,12 +39,18 @@ function textWidth (text: string): number{
 }
 
 function charWidth (char: string) :number{
+    const font: string = "1rem Arial"
     if (textWidthCache[char]){
         return textWidthCache[char];
     }
+console.log("foobar")
     const canvas = document.createElement('canvas');
+    console.log(canvas);
     const context = canvas.getContext('2d');
+    console.log("barfoo")
+
     if(context) {
+        context.font = font;
         const width = context.measureText(char).width;
         textWidthCache[char] = width;
     }

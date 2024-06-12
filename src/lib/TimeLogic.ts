@@ -42,5 +42,4 @@ export function XAxisAdjustment(timeInfo: DateRange): XAxisTime {
     }
 
     return XAxis;
-
 }

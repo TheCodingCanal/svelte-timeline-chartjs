@@ -26,8 +26,6 @@
     export const maxDate: Date = DatedTime.max;
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
-    console.log("maxDateString", maxDateStr, "maxDate", maxDate);
-    console.log(DatedTime);
     $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
@@ -57,8 +55,6 @@
 
         tooltipDataIndex = tooltip.$context.tooltipItems[0].dataIndex;
         tooltipDatasetIndex = tooltip.$context.tooltipItems[0].datasetIndex;
-        // console.log('bar data', tooltip.$context.tooltipItems[0].element);
-        // console.log(context);
 
         tooltipOpacity = 1;
         tooltipLeft = tooltip.caretX;
@@ -78,7 +74,16 @@
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
         //Flips tooltip to left side of bar if in right half of screen.
-        else if (tooltip.caretX > chart.chartArea.right / 2) {
+        else if (tooltip.caretX > chart.chartArea.right / 2 && tooltip.caretX < window.innerWidth) {
+            tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
+            tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+        }
+        //When bar goes off of the left side of the screen tooltips left side will align with chart left.
+        if (tooltip.$context.tooltip.dataPoints[0].element.base <= chart.chartArea.left) {
+            tooltipLeft = chart.chartArea.left;
+        }
+        //When bar goes off of the right side of the screen the tooltip will flip to the left side.
+        else if (tooltip.caretX >= chart.chartArea.right) {
             tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
@@ -96,10 +101,11 @@
 			enabled: false,
 			position: 'nearest',
             external: externalTooltipHandler
-
         },
         datalabels:{
             clamp: true,
+            textAlign: 'center',
+            display: 'auto'
         }
     }
 	}}

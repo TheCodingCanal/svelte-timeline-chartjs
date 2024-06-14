@@ -1,11 +1,5 @@
-import {
-	characterWidthEstimates,
-	formatText,
-	setupCanvasForEstimates
-} from '$lib/dataLabelTruncator';
+import {characterWidthEstimates, formatText, setupCanvasForEstimates, charWidth} from '$lib/dataLabelTruncator';
 import { describe, expect, it, test, vi } from 'vitest';
-
-// const { window } = new JSDOM('<!doctype html><html><body></body></html>');
 
 declare global {
 	namespace NodeJS {
@@ -49,23 +43,145 @@ describe('mockWindow', () => {
 	});
 });
 
-// const { window } = new JSDOM('<!doctype html><html><body></body></html>');
-// global.document = window.document;
-// global.window = global.document.defaultView;
-
 test('takes in a sample string and the width of the bar and returns a truncated version of the string', () => {
-	const inputString: string =
-		'This is the label for test one. \nSecond line of label for test one. \nThird line of label for test one.';
+	const inputString: string =  'This is the label for test one. \nSecond line of label for test one. \nThird line of label for test one.';
 	const inputWidth: number = 150;
-	const expectedString: string =
-		'This is the label for test one. \nSecond line of label for test one. \nThird line of label for test one.\n';
-	// const spy: MockInstance = vi.spyOn(document, 'createElement').mockReturnValue(new HTMLDivElement());
-	console.log('cookie');
+	const expectedString: string = 'This is the label for test one. \nSecond line of label for test one. \nThird line of label for test one.\n';
+	// console.log('cookie');
 	setupCanvasForEstimates(window.HTMLCanvasElement.prototype);
 	characterWidthEstimates();
-	console.log('bar');
+	// console.log('bar');
 	const actualString: string = formatText(inputString, inputWidth);
-	console.log(actualString);
+	// console.log(actualString);
 	expect(actualString).toEqual(expectedString);
-	// expect(spy).toHaveBeenCalled();
+});
+
+test('when charWidth takes in a character as a string it will return the correct width of the character.', () => {
+	const inputCharacter: string = "A";
+	const expectedWidth: number = 1;
+	setupCanvasForEstimates(window.HTMLCanvasElement.prototype);
+	const actualWidth = charWidth(inputCharacter);
+	expect(actualWidth).toEqual(expectedWidth);
+});
+
+test('when formatText is called with a string and a width the string will be trimmed to fit the width.', () => {
+		const inputString: string = 'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
+	const expectedString: string = 'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.\n';
+		// const expectedString: string = 'THIS IS THE LABEL F\nSECOND LINE OF THE \nTHIRD LINE OF LABEL'
+		const inputWidth: number = 150;
+		const characterWidths: Record<string, number> = {
+			'A': 1,
+			'B': 1,
+			'C': 1,
+			'D': 1,
+			'E': 1,
+			'F': 1,
+			'G': 1,
+			'H': 1,
+			'I': 1,
+			'J': 1,
+			'K': 1,
+			'L': 1,
+			'M': 1,
+			'N': 1,
+			'O': 1,
+			'P': 1,
+			'Q': 1,
+			'R': 1,
+			'S': 1,
+			'T': 1,
+			'U': 1,
+			'V': 1,
+			'W': 1,
+			'X': 1,
+			'Y': 1,
+			'Z': 1,
+			'.': 1,
+			' ': 1
+		};
+
+		const characterWidthsFunction = (char: string): number => {
+			return characterWidths[char];
+		}
+
+	const actualString: string = formatText(inputString, inputWidth, characterWidthsFunction);
+		console.log(expectedString, actualString);
+	expect(actualString).toEqual(expectedString);
+});
+
+test('When characterWidthEstimates is called with the method CharWidthInput it will produce a record of chars and their widths.', () => {
+	const characterWidths: Record<string, number> = {
+		'A': 1,
+		'B': 1,
+		'C': 1,
+		'D': 1,
+		'E': 1,
+		'F': 1,
+		'G': 1,
+		'H': 1,
+		'I': 1,
+		'J': 1,
+		'K': 1,
+		'L': 1,
+		'M': 1,
+		'N': 1,
+		'O': 1,
+		'P': 1,
+		'Q': 1,
+		'R': 1,
+		'S': 1,
+		'T': 1,
+		'U': 1,
+		'V': 1,
+		'W': 1,
+		'X': 1,
+		'Y': 1,
+		'Z': 1,
+		'a': 1,
+		'b': 1,
+		'c': 1,
+		'd': 1,
+		'e': 1,
+		'f': 1,
+		'g': 1,
+		'h': 1,
+		'i': 1,
+		'j': 1,
+		'k': 1,
+		'l': 1,
+		'm': 1,
+		'n': 1,
+		'o': 1,
+		'p': 1,
+		'q': 1,
+		'r': 1,
+		's': 1,
+		't': 1,
+		'u': 1,
+		'v': 1,
+		'w': 1,
+		'x': 1,
+		'y': 1,
+		'z': 1,
+		'0': 1,
+		'1': 1,
+		'2': 1,
+		'3': 1,
+		'4': 1,
+		'5': 1,
+		'6': 1,
+		'7': 1,
+		'8': 1,
+		'9': 1,
+		'-': 1,
+		'/': 1,
+		':': 1,
+		'%': 1,
+	};
+
+	const characterWidthsFunction = (char: string): number => {
+		return characterWidths[char];
+	}
+	const actualRecord: Record<string, number> = characterWidthEstimates(characterWidthsFunction)
+	expect(actualRecord).toEqual(characterWidths)
 });

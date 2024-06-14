@@ -12,6 +12,8 @@
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
     import {characterWidthEstimates, formatText} from "$lib/dataLabelTruncator";
+    import type {AnyObject} from "chart.js/dist/types/basic"
+    import {Element as chartElement} from 'chart.js'
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -92,24 +94,20 @@
                     if(chart.data.datasets[datasetIndex].data[dataIndex].label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
                         const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
-                        //need to figure out the type for barData
-
-                        const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex];
-                        let shownBarWidth: number = barData.width;
+                        const barData: chartElement<AnyObject, AnyObject> = chart.getDatasetMeta(datasetIndex).data[dataIndex];
+                        let shownBarWidth: number = barWidth;
                         //The bar is off both sides of the screen.
-                        if((barData.x - barData.width) < chart.chartArea.left && (barData.x) > chart.chartArea.right){
-                            shownBarWidth = barWidth - ((barData.x + barData.width) - chart.chartArea.right) - (chart.chartArea.left - (barData.x));
+                        if((barData.x - barWidth) < chart.chartArea.left && (barData.x) > chart.chartArea.right){
+                            shownBarWidth = barWidth - ((barData.x + barWidth) - chart.chartArea.right) - (chart.chartArea.left - (barData.x));
                             console.log(shownBarWidth, chart.chartArea.right - chart.chartArea.left)
                         }
                         //bar is off the right side of the screen.
                         else if((barData.x) > chart.chartArea.right){
-                            // shownBarWidth = 50;
                             shownBarWidth = barWidth - ((barData.x) - chart.chartArea.right);
                         }
                         //bar is off the left side of the screen.
-                        else if((barData.x - barData.width) < chart.chartArea.left){
-                            // shownBarWidth = 50;
-                            shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barData.width));
+                        else if((barData.x - barWidth) < chart.chartArea.left){
+                            shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
                         }
 
                         let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
@@ -117,10 +115,10 @@
                     }
                 }
             }
-            // chart.data.datasets[0].data[0].label = "this is a test";
         }
         chart.update();
     }
+
 </script>
 
 <Bar
@@ -130,9 +128,10 @@
 		responsive: true,
    animation: {
             //need type for callbackInfo
-      onComplete: function(callbackInfo) {
-         if (callbackInfo.initial) {updateLabel(callbackInfo.chart);}
-      }
+      onComplete:function (event) {
+        if (event.initial) {updateLabel(event.chart);}
+    }
+
    },
     scales: { x: { type: 'time', time: { unit: TimeData.unit }, min: minDateStr, max: maxDateStr, ticks: {stepSize: TimeData.stepSize}} },
     plugins: {

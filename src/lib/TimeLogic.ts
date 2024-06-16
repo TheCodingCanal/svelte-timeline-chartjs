@@ -1,24 +1,23 @@
-// import {TimeData} from "$lib/TimeData";
-import type {DateTime, XAxisTime} from "$lib/types";
+import type {DateRange, XAxisTime} from "$lib/types";
 
-function differenceBettweenDates(timeInfo: DateTime) {
+function differenceBetweenDatesHours(timeInfo: DateRange) {
     const timeMax: Date = timeInfo.max;
     const timeMin: Date = timeInfo.min;
-    const timeDifference: number = timeMax.getTime() - timeMin.getTime();
+    const timeDifferenceMilliseconds: number = timeMax.getTime() - timeMin.getTime();
     console.log(timeInfo.min);
     console.log(timeMax.getTime() - timeMin.getTime());
-    const timeDifferenceHours: number = timeDifference / (60000 * 60);
+    const timeDifferenceHours: number = timeDifferenceMilliseconds / (60000 * 60);
     return timeDifferenceHours;
 }
 
-export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
+export function XAxisAdjustment(timeInfo: DateRange): XAxisTime {
 
-    const timespan: number = differenceBettweenDates(timeInfo);
+    const timespan: number = differenceBetweenDatesHours(timeInfo);
     const XAxis: XAxisTime = {
-        min : timeInfo.min,
-        max : timeInfo.max,
-        unit : "day",
-        stepSize : 1,
+        min: timeInfo.min,
+        max: timeInfo.max,
+        unit: "day",
+        stepSize: 1,
     };
 
     if (timespan <= 2) {
@@ -26,12 +25,12 @@ export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
         XAxis.stepSize = 15;
         return XAxis;
     }
-    if (timespan < 4 && timespan > 2) {
+    if (timespan <= 4 && timespan > 2) {
         XAxis.unit = "minute";
         XAxis.stepSize = 30;
         return XAxis;
     }
-    if (timespan > 4 && timespan < 24) {
+    if (timespan > 4 && timespan <= 24) {
         XAxis.unit = "hour";
         XAxis.stepSize = 1;
         return XAxis;
@@ -43,5 +42,4 @@ export function XAxisAdjustment(timeInfo: DateTime): XAxisTime {
     }
 
     return XAxis;
-    console.log(timespan)
 }

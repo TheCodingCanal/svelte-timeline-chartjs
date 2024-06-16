@@ -24,11 +24,10 @@
         if (right !== 0) {
             // style += `left: ${left}px;`
             style += `right: ${right}px;`;
-            style += 'display: flex; justify-content: flex-end;'
+            style += 'display: flex; justify-content: flex-end;';
             console.log('right', right);
         }
     }
-
 </script>
 <div class="tooltip" id="tooltip" {style}>
     {@html data.datasets[tooltipDatasetIndex].data[tooltipDataIndex].tooltip}

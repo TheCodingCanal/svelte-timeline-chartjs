@@ -67,7 +67,7 @@ export const data = {
                 {
                     x: ['2022-10-01', '2022-10-05'],
                     y: 'Ankermake',
-                    label: 'Job 1236',
+                    label: 'Job 1236\nThis is a new line of text that is really long. I like writing test sentences. One more sentence should do it.',
                     tooltip: [
                         `<style>tr:nth-child(even) {
 							background-color: gray;
@@ -98,7 +98,7 @@ export const data = {
                 {
                     x: ['2022-10-05', '2022-10-12'],
                     y: 'Ankermake',
-                    label: 'Job 1237',
+                    label: 'Job 1237\nThis is a new line of text that is really long. I like writing test sentences. One more sentence should do it.',
                     tooltip: [
                         `<style>tr:nth-child(even) {
 							background-color: gray;

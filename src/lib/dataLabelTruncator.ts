@@ -25,18 +25,18 @@ export function charWidth(char: string): number {
         return _textWidthCache[char];
     }
     _canvas = document.createElement('canvas');
-    const context: CanvasRenderingContext2D|null = _canvas.getContext('2d');
+    const context: CanvasRenderingContext2D | null = _canvas.getContext('2d');
 
     if (context) {
         context.font = font;
-        const width = context.measureText(char).width;
+        const width: number = context.measureText(char).width;
         _textWidthCache[char] = width;
     }
     return _textWidthCache[char];
 }
 
 export function characterWidthEstimates(charWidthInput: (char: string) => number = charWidth): Record<string, number> {
-    const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-/:%';
+    const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-/:%. ';
     const characterWidths: Record<string, number> = {};
 
     for (const character of characters) {

@@ -90,7 +90,6 @@
         if(chart) {
             for(let datasetIndex: number = 0; datasetIndex < chart.data.datasets.length; datasetIndex++){
                 for(let dataIndex: number = 0; dataIndex < chart.data.datasets[datasetIndex].data.length; dataIndex++){
-                    // chart.data.datasets[datasetIndex].data[dataIndex].label = "this is a test";
                     if(chart.data.datasets[datasetIndex].data[dataIndex].label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
                         const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 

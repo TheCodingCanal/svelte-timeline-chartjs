@@ -1,8 +1,11 @@
 <script lang="ts">
 
+
+
     export const ssr = false;
     export const csr = true;
 
+    import {onMount} from 'svelte'
     import 'chartjs-adapter-date-fns';
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
@@ -26,6 +29,7 @@
     export const maxDate: Date = DatedTime.max;
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
+    let chartInstance;
     $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
@@ -40,7 +44,7 @@
     } from 'chart.js';
 
     Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
-
+    
     function externalTooltipHandler(
         this: TooltipModel<'bar'>,
         context: { chart: Chart; tooltip: TooltipModel<'bar'> }
@@ -88,9 +92,19 @@
             tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
         }
     }
+
+    function clickHandler(click){
+
+        const points = chartInstance.$capture_state().chart.getElementsAtEventForMode(click, 'nearest', {intersect: true}, true);
+        if(points){
+            console.log(points);
+        }
+    }
+
+
 </script>
 
-<Bar
+<Bar bind:this={chartInstance}
         {data}
         options={{
 		indexAxis: 'y',
@@ -107,7 +121,8 @@
             textAlign: 'center',
             display: 'auto'
         }
-    }
+    },
+    onClick: clickHandler
 	}}
         plugins={[ChartDataLabels]}
 

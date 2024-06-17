@@ -44,7 +44,7 @@
     } from 'chart.js';
 
     Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
-    
+
     function externalTooltipHandler(
         this: TooltipModel<'bar'>,
         context: { chart: Chart; tooltip: TooltipModel<'bar'> }

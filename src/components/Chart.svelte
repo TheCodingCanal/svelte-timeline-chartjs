@@ -106,7 +106,6 @@
                         //The bar is off both sides of the screen.
                         if ((barData.x - barWidth) < chart.chartArea.left && (barData.x) > chart.chartArea.right) {
                             shownBarWidth = barWidth - ((barData.x + barWidth) - chart.chartArea.right) - (chart.chartArea.left - (barData.x));
-                            console.log(shownBarWidth, chart.chartArea.right - chart.chartArea.left)
                         }
                         //bar is off the right side of the screen.
                         else if ((barData.x) > chart.chartArea.right) {
@@ -134,7 +133,6 @@
 		indexAxis: 'y',
 		responsive: true,
    animation: {
-            //need type for callbackInfo
       onComplete:function (event) {
         if (event.initial) {updateLabel(event.chart);}
     }

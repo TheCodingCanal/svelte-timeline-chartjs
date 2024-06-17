@@ -98,9 +98,7 @@
         if (chart) {
             for (let datasetIndex: number = 0; datasetIndex < chart.data.datasets.length; datasetIndex++) {
                 for (let dataIndex: number = 0; dataIndex < chart.data.datasets[datasetIndex].data.length; dataIndex++) {
-                    if (chart && chart.data && chart.data.datasets && chart.data.datasets[datasetIndex] && chart.data.datasets[datasetIndex].data &&
-                        chart.data.datasets[datasetIndex].data[dataIndex] &&
-                        chart.data.datasets[datasetIndex].data[dataIndex].label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
+                    if (chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
                         const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
                         const barData: chartElement<AnyObject, AnyObject> = chart.getDatasetMeta(datasetIndex).data[dataIndex];

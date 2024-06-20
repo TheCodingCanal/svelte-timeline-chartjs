@@ -102,6 +102,7 @@
             const datasetIndex: number = points[0].datasetIndex;
             const dataIndex: number = points[0].index;
             barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+            alert("It works")
             modalVisible = true;
 
         }

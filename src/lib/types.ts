@@ -31,4 +31,8 @@ export interface DateRange{
     max: Date;
 }
 
+export interface anyObject{
+    object: Record<string, any>;
+}
+
 export type Unit = false| "millisecond"| "second"| "minute" | "hour" | "day" | "week" | "month" | "quarter" | "year" | undefined

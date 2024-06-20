@@ -12,7 +12,8 @@
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
     import {characterWidthEstimates, formatText} from "$lib/dataLabelTruncator";
-    import type {AnyObject} from "chart.js/dist/types/basic"
+    // import type {AnyObject} from "chart.js/dist/types/basic"
+    import type {anyObject} from "$lib/types";
     import {Element as chartElement} from 'chart.js'
 
     let tooltipDataIndex: number = 0;
@@ -101,7 +102,7 @@
                     if (chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label && chart.data.datasets[datasetIndex].data[dataIndex].label !== null) {
                         const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
-                        const barData: chartElement<AnyObject, AnyObject> = chart.getDatasetMeta(datasetIndex).data[dataIndex];
+                        const barData: chartElement<anyObject, anyObject> = chart.getDatasetMeta(datasetIndex).data[dataIndex];
                         let shownBarWidth: number = barWidth;
                         //The bar is off both sides of the screen.
                         if ((barData.x - barWidth) < chart.chartArea.left && (barData.x) > chart.chartArea.right) {

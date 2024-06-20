@@ -5,7 +5,7 @@
     export const ssr = false;
     export const csr = true;
 
-    import {onMount} from 'svelte'
+    import {setContext} from 'svelte'
     import 'chartjs-adapter-date-fns';
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
@@ -30,6 +30,7 @@
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
     let chartInstance;
+    let showModal = false;
     $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
@@ -96,8 +97,13 @@
     function clickHandler(click){
 
         const points = chartInstance.$capture_state().chart.getElementsAtEventForMode(click, 'nearest', {intersect: true}, true);
-        if(points){
-            console.log(points);
+        if(points[0]){
+            console.log(points[0].element);
+            const datasetIndex: number = points[0].datasetIndex;
+            const dataIndex: number = points[0].index;
+            const barLabel: string = data.datasets[datasetIndex].data[dataIndex].label;
+            showModal = true;
+            console.log(showModal);
         }
     }
 

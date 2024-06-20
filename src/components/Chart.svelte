@@ -12,7 +12,6 @@
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
     import {characterWidthEstimates, formatText} from "$lib/dataLabelTruncator";
-    // import type {AnyObject} from "chart.js/dist/types/basic"
     import type {anyObject} from "$lib/types";
     import {Element as chartElement} from 'chart.js'
 

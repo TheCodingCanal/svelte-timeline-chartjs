@@ -1,14 +1,13 @@
-<script>
-    import Modal from './Modal.svelte';
-    import {getContext} from "svelte";
+<script lang="ts">
+    import ModalFunctionality from "./ModalFunctionality.svelte";
 
-    let showModal = false;
+    export  let showModal: boolean = false;
+    export let label: string;
 
 </script>
 
-<!--<button on:click={() => (showModal = true)}> show modal </button>-->
-
-<Modal bind:showModal>
+<ModalFunctionality bind:showModal>
+    <h1>{label}</h1>
     <h2 slot="header">
         modal
         <small><em>adjective</em> mod·al \ˈmō-dəl\</small>
@@ -30,4 +29,4 @@
     </ol>
 
     <a href="https://www.merriam-webster.com/dictionary/modal">merriam-webster.com</a>
-</Modal>
+</ModalFunctionality>

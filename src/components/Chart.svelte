@@ -5,7 +5,6 @@
     export const ssr = false;
     export const csr = true;
 
-    import {setContext} from 'svelte'
     import 'chartjs-adapter-date-fns';
     import ChartDataLabels from 'chartjs-plugin-datalabels';
     import {Bar} from 'svelte-chartjs';
@@ -14,6 +13,7 @@
     import TooltipText from './TooltipText.svelte';
     import {XAxisAdjustment} from "$lib/TimeLogic";
     import type {XAxisTime} from "$lib/types";
+    import ModalSample from "./ModalSample.svelte";
 
     let tooltipDataIndex: number = 0;
     let tooltipDatasetIndex: number = 0;
@@ -30,7 +30,8 @@
     export const minDateStr: string = minDate.toISOString();
     export const maxDateStr: string = maxDate.toISOString();
     let chartInstance;
-    let showModal = false;
+    let modalVisible = false;
+    let barLabel: string;
     $: TimeData = XAxisAdjustment(DatedTime);
 
     import {
@@ -95,15 +96,14 @@
     }
 
     function clickHandler(click){
-
         const points = chartInstance.$capture_state().chart.getElementsAtEventForMode(click, 'nearest', {intersect: true}, true);
         if(points[0]){
             console.log(points[0].element);
             const datasetIndex: number = points[0].datasetIndex;
             const dataIndex: number = points[0].index;
-            const barLabel: string = data.datasets[datasetIndex].data[dataIndex].label;
-            showModal = true;
-            console.log(showModal);
+            barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+            modalVisible = true;
+
         }
     }
 
@@ -143,4 +143,7 @@
         opacity={tooltipOpacity}
         right={tooltipRight}
 ></TooltipText>
-
+<ModalSample
+showModal={modalVisible}
+label={barLabel}
+></ModalSample>

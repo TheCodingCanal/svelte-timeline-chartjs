@@ -29,11 +29,9 @@
         }
     }
 </script>
-
 <div class="tooltip" id="tooltip" {style}>
     {@html data.datasets[tooltipDatasetIndex].data[tooltipDataIndex].tooltip}
 </div>
-
 <style>
     .tooltip {
         position: absolute;

@@ -102,7 +102,7 @@
             const datasetIndex: number = points[0].datasetIndex;
             const dataIndex: number = points[0].index;
             barLabel = data.datasets[datasetIndex].data[dataIndex].label;
-            alert("It works")
+            // alert("It works");
             modalVisible = true;
 
         }
@@ -111,7 +111,7 @@
 
 </script>
 
-<Bar bind:this={chartInstance}
+<Bar data-testid="barChart" bind:this={chartInstance}
         {data}
         options={{
 		indexAxis: 'y',

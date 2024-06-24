@@ -6,7 +6,7 @@
 
 </script>
 
-<ModalFunctionality bind:showModal>
+<ModalFunctionality data-testid="modal" bind:showModal>
     <h1>{label}</h1>
     <h2 slot="header">
         modal

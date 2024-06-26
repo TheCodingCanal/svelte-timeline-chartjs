@@ -5,7 +5,7 @@
 	export let label: string;
 </script>
 
-<ModalFunctionality data-testid="modal" bind:showModal>
+<ModalFunctionality bind:showModal>
 	<h1>{label}</h1>
 	<h2 slot="header">
 		modal

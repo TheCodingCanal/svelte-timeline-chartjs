@@ -11,10 +11,7 @@
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
 	import { data } from '../lib/data';
-	import { DatedTime } from '$lib/TimeData';
 	import TooltipText from './TooltipText.svelte';
-	import { XAxisAdjustment } from '$lib/TimeLogic';
-	import type { XAxisTime } from '$lib/types';
 	import ModalSample from './ModalSample.svelte';
 
 	let tooltipDataIndex: number = 0;
@@ -100,6 +97,19 @@
 		}
 	}
 
+	function clickHandler(click) {
+		const points = chartInstance
+			.$capture_state()
+			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+		if (points[0]) {
+			console.log(points[0].element);
+			const datasetIndex: number = points[0].datasetIndex;
+			const dataIndex: number = points[0].index;
+			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+			modalVisible = true;
+		}
+	}
+
 	function updateLabel(chart: Chart) {
 		characterWidthEstimates();
 		if (chart) {
@@ -149,19 +159,6 @@
 		}
 		chart.update();
 	}
-
-	function clickHandler(click) {
-		const points = chartInstance
-			.$capture_state()
-			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-		if (points[0]) {
-			console.log(points[0].element);
-			const datasetIndex: number = points[0].datasetIndex;
-			const dataIndex: number = points[0].index;
-			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
-			modalVisible = true;
-		}
-	}
 </script>
 
 <Bar
@@ -202,9 +199,9 @@
 					size: 12,
 					style: 'normal'
 				}
-			},
-			onClick: clickHandler
-		}
+			}
+		},
+		onClick: clickHandler
 	}}
 	plugins={[ChartDataLabels]}
 />
@@ -218,4 +215,4 @@
 	opacity={tooltipOpacity}
 	right={tooltipRight}
 ></TooltipText>
-<ModalSample showModal={modalVisible} label={barLabel}></ModalSample>
+<ModalSample bind:showModal={modalVisible} label={barLabel}></ModalSample>

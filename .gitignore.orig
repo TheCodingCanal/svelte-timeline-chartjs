@@ -8,8 +8,11 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-/src/test/.svelte-kit
+<<<<<<< HEAD
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+=======
+/src/test/.svelte-kit
+>>>>>>> main

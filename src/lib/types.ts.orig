@@ -31,10 +31,13 @@ export interface DateRange {
 	max: Date;
 }
 
+<<<<<<< HEAD
+=======
 export interface anyObject {
 	object: Record<string, any>;
 }
 
+>>>>>>> main
 export type Unit =
 	| false
 	| 'millisecond'

@@ -2,20 +2,27 @@
 	export const ssr = false;
 	export const csr = true;
 
+<<<<<<< HEAD
+=======
 	import { DatedTime } from '$lib/TimeData';
 	import { XAxisAdjustment } from '$lib/TimeLogic';
 	import { characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
 	import type { XAxisTime, anyObject } from '$lib/types';
 	import { Element as chartElement } from 'chart.js';
+>>>>>>> main
 	import 'chartjs-adapter-date-fns';
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
 	import { data } from '../lib/data';
+<<<<<<< HEAD
 	import { DatedTime } from '$lib/TimeData';
 	import TooltipText from './TooltipText.svelte';
 	import { XAxisAdjustment } from '$lib/TimeLogic';
 	import type { XAxisTime } from '$lib/types';
 	import ModalSample from './ModalSample.svelte';
+=======
+	import TooltipText from './TooltipText.svelte';
+>>>>>>> main
 
 	let tooltipDataIndex: number = 0;
 	let tooltipDatasetIndex: number = 0;
@@ -31,9 +38,12 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
+<<<<<<< HEAD
 	let chartInstance: Chart;
 	let modalVisible: boolean = false;
 	let barLabel: string;
+=======
+>>>>>>> main
 	$: TimeData = XAxisAdjustment(DatedTime);
 
 	import {
@@ -100,6 +110,19 @@
 		}
 	}
 
+<<<<<<< HEAD
+	function clickHandler(click) {
+		const points = chartInstance
+			.$capture_state()
+			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+		if (points[0]) {
+			console.log(points[0].element);
+			const datasetIndex: number = points[0].datasetIndex;
+			const dataIndex: number = points[0].index;
+			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+			modalVisible = true;
+		}
+=======
 	function updateLabel(chart: Chart) {
 		characterWidthEstimates();
 		if (chart) {
@@ -118,6 +141,7 @@
 						chart.data.datasets[datasetIndex].data[dataIndex].label !== null
 					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
+
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<
 							anyObject,
 							anyObject
@@ -138,6 +162,7 @@
 						else if (barData.x - barWidth < chart.chartArea.left) {
 							shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
 						}
+
 						let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
@@ -148,29 +173,22 @@
 			}
 		}
 		chart.update();
-	}
-
-	function clickHandler(click) {
-		const points = chartInstance
-			.$capture_state()
-			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
-		if (points[0]) {
-			console.log(points[0].element);
-			const datasetIndex: number = points[0].datasetIndex;
-			const dataIndex: number = points[0].index;
-			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
-			modalVisible = true;
-		}
+>>>>>>> main
 	}
 </script>
 
 <Bar
+<<<<<<< HEAD
 	data-testid="barChart"
 	bind:this={chartInstance}
+=======
+>>>>>>> main
 	{data}
 	options={{
 		indexAxis: 'y',
 		responsive: true,
+<<<<<<< HEAD
+=======
 		animation: {
 			onComplete: function (event) {
 				if (event.initial) {
@@ -178,6 +196,7 @@
 				}
 			}
 		},
+>>>>>>> main
 		scales: {
 			x: {
 				type: 'time',
@@ -196,15 +215,21 @@
 			datalabels: {
 				clamp: true,
 				textAlign: 'center',
+<<<<<<< HEAD
+				display: 'auto'
+			}
+		},
+		onClick: clickHandler
+=======
 				display: 'auto',
 				font: {
 					family: 'Arial',
 					size: 12,
 					style: 'normal'
 				}
-			},
-			onClick: clickHandler
+			}
 		}
+>>>>>>> main
 	}}
 	plugins={[ChartDataLabels]}
 />
@@ -218,4 +243,7 @@
 	opacity={tooltipOpacity}
 	right={tooltipRight}
 ></TooltipText>
+<<<<<<< HEAD
 <ModalSample showModal={modalVisible} label={barLabel}></ModalSample>
+=======
+>>>>>>> main

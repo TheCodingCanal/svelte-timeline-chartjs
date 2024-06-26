@@ -14,7 +14,6 @@ test('When bar is clicked with time data being 2022-10-02T12:00 and 2022-10-07T1
 	page
 }) => {
 	const stringUrl: string = 'http://localhost:5173/'.toString();
-	console.log(stringUrl);
 	await page.goto(stringUrl);
 
 	const barChart: Locator = page.getByTestId('barChart');

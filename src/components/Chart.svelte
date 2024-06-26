@@ -102,7 +102,6 @@
 			.$capture_state()
 			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
 		if (points[0]) {
-			console.log(points[0].element);
 			const datasetIndex: number = points[0].datasetIndex;
 			const dataIndex: number = points[0].index;
 			barLabel = data.datasets[datasetIndex].data[dataIndex].label;

@@ -27,6 +27,7 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
+	let chartInstance: Bar;
 	$: TimeData = XAxisAdjustment(DatedTime);
 
 	import {
@@ -108,7 +109,7 @@
 				) {
 					if (
 						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label &&
-						chart.data.datasets[datasetIndex].data[dataIndex].label !== null
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label !== null
 					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
@@ -144,13 +145,32 @@
 		}
 		chart.update();
 	}
+
+	async function sleep(ms: number): Promise<void> {
+    return new Promise(
+        (resolve) => setTimeout(resolve, ms));
+}
+
+	function updateLabelOnResize(chart: Chart, chartSize: { width: number; height: number; }) {
+		console.log("It happened");
+		console.log(chartSize);
+
+		if(chart.getDatasetMeta(0).data.length > 0){
+			console.log("should resize");
+		updateLabel(chart);
+		}
+		
+	}
+
 </script>
 
 <Bar style="position: relative; height:95vh; width:95vw"
+	bind:this={chartInstance}
 	{data}
-	onResize= "updateLabel()",
+	
 	options={{
 		maintainAspectRatio: false,
+		onResize: updateLabelOnResize,
 		indexAxis: 'y',
 		responsive: true,
 		animation: {

@@ -7,11 +7,13 @@
 	import { characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
 	import type { XAxisTime, anyObject } from '$lib/types';
 	import { Element as chartElement } from 'chart.js';
+	import type { ChartEvent } from 'chart.js';
 	import 'chartjs-adapter-date-fns';
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
 	import { data } from '../lib/data';
 	import TooltipText from './TooltipText.svelte';
+	import ModalSample from './ModalSample.svelte';
 
 	let tooltipDataIndex: number = 0;
 	let tooltipDatasetIndex: number = 0;
@@ -27,6 +29,9 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
+	let chartInstance: Bar;
+	let modalVisible: boolean = false;
+	let barLabel: string;
 	$: TimeData = XAxisAdjustment(DatedTime);
 
 	import {
@@ -93,6 +98,19 @@
 		}
 	}
 
+	function clickHandler(click: ChartEvent) {
+		console.log(click);
+		const points = chartInstance
+			.$capture_state()
+			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+		if (points[0]) {
+			const datasetIndex: number = points[0].datasetIndex;
+			const dataIndex: number = points[0].index;
+			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+			modalVisible = true;
+		}
+	}
+
 	function updateLabel(chart: Chart) {
 		characterWidthEstimates();
 		if (chart) {
@@ -108,10 +126,9 @@
 				) {
 					if (
 						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label &&
-						chart.data.datasets[datasetIndex].data[dataIndex].label !== null
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label !== null
 					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
-
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<
 							anyObject,
 							anyObject
@@ -132,7 +149,6 @@
 						else if (barData.x - barWidth < chart.chartArea.left) {
 							shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
 						}
-
 						let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
@@ -147,6 +163,8 @@
 </script>
 
 <Bar
+	data-testid="barChart"
+	bind:this={chartInstance}
 	{data}
 	options={{
 		indexAxis: 'y',
@@ -183,7 +201,8 @@
 					style: 'normal'
 				}
 			}
-		}
+		},
+		onClick: clickHandler
 	}}
 	plugins={[ChartDataLabels]}
 />
@@ -197,3 +216,4 @@
 	opacity={tooltipOpacity}
 	right={tooltipRight}
 ></TooltipText>
+<ModalSample bind:showModal={modalVisible} label={barLabel}></ModalSample>

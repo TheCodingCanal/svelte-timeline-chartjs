@@ -1,0 +1,11 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": ["source.fixAll.eslint", "source.organizeImports", "source.fixAll"],
+	"[svelte]": { "editor.defaultFormatter": "svelte.svelte-vscode" },
+	"editor.inlineSuggest.enabled": true,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"svelte.enable-ts-plugin": true
+}

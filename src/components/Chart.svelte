@@ -7,6 +7,7 @@
 	import { characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
 	import type { XAxisTime, anyObject } from '$lib/types';
 	import { Element as chartElement } from 'chart.js';
+	import type { ChartEvent } from 'chart.js';
 	import 'chartjs-adapter-date-fns';
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
@@ -28,7 +29,7 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
-	let chartInstance: Chart;
+	let chartInstance: Bar;
 	let modalVisible: boolean = false;
 	let barLabel: string;
 	$: TimeData = XAxisAdjustment(DatedTime);
@@ -97,7 +98,8 @@
 		}
 	}
 
-	function clickHandler(click) {
+	function clickHandler(click: ChartEvent) {
+		console.log(click);
 		const points = chartInstance
 			.$capture_state()
 			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
@@ -124,7 +126,7 @@
 				) {
 					if (
 						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label &&
-						chart.data.datasets[datasetIndex].data[dataIndex].label !== null
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label !== null
 					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<

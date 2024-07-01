@@ -148,6 +148,7 @@
 
 <Bar style="position: relative; height:95vh; width:95vw"
 	{data}
+	onResize= "updateLabel()",
 	options={{
 		maintainAspectRatio: false,
 		indexAxis: 'y',

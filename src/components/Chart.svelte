@@ -146,9 +146,10 @@
 	}
 </script>
 
-<Bar
+<Bar style="position: relative; height:95vh; width:95vw"
 	{data}
 	options={{
+		maintainAspectRatio: false,
 		indexAxis: 'y',
 		responsive: true,
 		animation: {

@@ -27,6 +27,9 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
+
+	const dataClone = structuredClone(data);
+	
 	let chartInstance: Bar;
 	$: TimeData = XAxisAdjustment(DatedTime);
 
@@ -107,10 +110,10 @@
 					dataIndex < chart.data.datasets[datasetIndex].data.length;
 					dataIndex++
 				) {
-					if (
-						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label &&
-						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label !== null
-					) {
+					// if (
+					// 	chart?.data?.datasets[datasetIndex]?.data[dataIndex] &&
+					// 	chart?.data?.datasets[datasetIndex]?.data[dataIndex] !== null
+					// ) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<
@@ -134,32 +137,23 @@
 							shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
 						}
 
-						let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
+						let dataLabelString = dataClone.datasets[datasetIndex].data[dataIndex].label;
+						console.log(dataLabelString);
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
 							shownBarWidth
 						);
 					}
 				}
-			}
+			// }
 		}
 		chart.update();
 	}
 
-	async function sleep(ms: number): Promise<void> {
-    return new Promise(
-        (resolve) => setTimeout(resolve, ms));
-}
-
 	function updateLabelOnResize(chart: Chart, chartSize: { width: number; height: number; }) {
-		console.log("It happened");
-		console.log(chartSize);
-
 		if(chart.getDatasetMeta(0).data.length > 0){
-			console.log("should resize");
-		updateLabel(chart);
+			updateLabel(chart);
 		}
-		
 	}
 
 </script>

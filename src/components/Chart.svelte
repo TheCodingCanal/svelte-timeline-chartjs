@@ -29,7 +29,8 @@
 	export const maxDateStr: string = maxDate.toISOString();
 
 	const dataClone = structuredClone(data);
-	
+	const updateLabelDebounce = debounce(updateLabelOnResize, 100);
+
 	let chartInstance: Bar;
 	$: TimeData = XAxisAdjustment(DatedTime);
 
@@ -110,10 +111,10 @@
 					dataIndex < chart.data.datasets[datasetIndex].data.length;
 					dataIndex++
 				) {
-					// if (
-					// 	chart?.data?.datasets[datasetIndex]?.data[dataIndex] &&
-					// 	chart?.data?.datasets[datasetIndex]?.data[dataIndex] !== null
-					// ) {
+					if (
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex] &&
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex] !== null
+					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
 
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<
@@ -145,26 +146,33 @@
 						);
 					}
 				}
-			// }
+			}
 		}
 		chart.update();
 	}
 
-	function updateLabelOnResize(chart: Chart, chartSize: { width: number; height: number; }) {
-		if(chart.getDatasetMeta(0).data.length > 0){
+	function debounce(fn: (chart: Chart) => void, ms = 300) {
+		let timeoutId: ReturnType<typeof setTimeout>;
+		return function (this: any, ...args: any[]) {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => fn.apply(this, args), ms);
+		};
+	}
+
+	function updateLabelOnResize(chart: Chart) {
+		if (chart.getDatasetMeta(0).data.length > 0) {
 			updateLabel(chart);
 		}
 	}
-
 </script>
 
-<Bar style="position: relative; height:95vh; width:95vw"
+<Bar
+	style="position: relative; height:95vh; width:95vw"
 	bind:this={chartInstance}
 	{data}
-	
 	options={{
 		maintainAspectRatio: false,
-		onResize: updateLabelOnResize,
+		onResize: updateLabelDebounce,
 		indexAxis: 'y',
 		responsive: true,
 		animation: {

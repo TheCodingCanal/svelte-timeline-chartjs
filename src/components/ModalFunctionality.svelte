@@ -1,7 +1,7 @@
-<script>
-	export let showModal;
+<script lang="ts">
+	export let showModal: boolean;
 
-	let dialog;
+	let dialog: HTMLDialogElement;
 	$: {
 		if (dialog) {
 			if (showModal) {

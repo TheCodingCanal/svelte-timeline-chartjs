@@ -7,13 +7,12 @@
 	import { characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
 	import type { XAxisTime, anyObject } from '$lib/types';
 	import { Element as chartElement } from 'chart.js';
-	import type { ChartEvent } from 'chart.js';
 	import 'chartjs-adapter-date-fns';
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
 	import { data } from '../lib/data';
-	import TooltipText from './TooltipText.svelte';
 	import ModalSample from './ModalSample.svelte';
+	import TooltipText from './TooltipText.svelte';
 
 	let tooltipDataIndex: number = 0;
 	let tooltipDatasetIndex: number = 0;
@@ -29,6 +28,10 @@
 	export const maxDate: Date = DatedTime.max;
 	export const minDateStr: string = minDate.toISOString();
 	export const maxDateStr: string = maxDate.toISOString();
+
+	const dataClone = structuredClone(data);
+	const updateLabelDebounce = debounce(updateLabelOnResize, 100);
+
 	let chartInstance: Bar;
 	let modalVisible: boolean = false;
 	let barLabel: string;
@@ -125,10 +128,11 @@
 					dataIndex++
 				) {
 					if (
-						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label &&
-						chart?.data?.datasets[datasetIndex]?.data[dataIndex]?.label !== null
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex] &&
+						chart?.data?.datasets[datasetIndex]?.data[dataIndex] !== null
 					) {
 						const barWidth: number = chart.getDatasetMeta(datasetIndex).data[dataIndex].width;
+
 						const barData = chart.getDatasetMeta(datasetIndex).data[dataIndex] as chartElement<
 							anyObject,
 							anyObject
@@ -149,7 +153,9 @@
 						else if (barData.x - barWidth < chart.chartArea.left) {
 							shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
 						}
-						let dataLabelString = chart.data.datasets[datasetIndex].data[dataIndex].label;
+
+						let dataLabelString = dataClone.datasets[datasetIndex].data[dataIndex].label;
+						console.log(dataLabelString);
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
 							shownBarWidth
@@ -160,13 +166,29 @@
 		}
 		chart.update();
 	}
+
+	function debounce(fn: (chart: Chart) => void, ms = 300) {
+		let timeoutId: ReturnType<typeof setTimeout>;
+		return function (this: any, ...args: any[]) {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => fn.apply(this, args), ms);
+		};
+	}
+
+	function updateLabelOnResize(chart: Chart) {
+		if (chart.getDatasetMeta(0).data.length > 0) {
+			updateLabel(chart);
+		}
+	}
 </script>
 
 <Bar
-	data-testid="barChart"
+	style="position: relative; height:95vh; width:95vw"
 	bind:this={chartInstance}
 	{data}
 	options={{
+		maintainAspectRatio: false,
+		onResize: updateLabelDebounce,
 		indexAxis: 'y',
 		responsive: true,
 		animation: {

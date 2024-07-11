@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ChartData } from '$lib/types';
+
 	export let data: ChartData;
 	export let tooltipDataIndex: number = 0;
 	export let tooltipDatasetIndex: number = 0;

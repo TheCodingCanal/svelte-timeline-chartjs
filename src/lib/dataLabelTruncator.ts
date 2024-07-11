@@ -20,7 +20,7 @@ export function formatText(
 		}
 		result += '\n';
 	}
-	return result;
+	return result.trim();
 }
 
 export function charWidth(char: string): number {

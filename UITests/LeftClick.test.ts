@@ -1,4 +1,4 @@
-import { test, expect, defineConfig } from '@playwright/test';
+import { defineConfig, expect, test } from '@playwright/test';
 import type { Locator } from 'playwright';
 
 export default defineConfig({
@@ -10,6 +10,7 @@ export default defineConfig({
 		baseURL: 'http://localhost:5173/'
 	}
 });
+
 test('When bar is clicked with time data being 2022-10-02T12:00 and 2022-10-07T18:00 then onClick function is called.', async ({
 	page
 }) => {

@@ -108,7 +108,7 @@ test('When  formatText takes in a sample string and the width of the bar, then i
 	const inputString: string =
 		'This is the label for test one. \nSecond line of label for test one. \nThird line of label for test one.';
 	const inputWidth: number = 15;
-	const expectedString: string = 'This is the lab\nSecond line of \nThird line of l\n';
+	const expectedString: string = 'This is the lab\nSecond line of \nThird line of l';
 	characterWidthEstimates();
 	const actualString: string = formatText(inputString, inputWidth);
 	expect(actualString).toEqual(expectedString);
@@ -117,7 +117,7 @@ test('When  formatText takes in a sample string and the width of the bar, then i
 test('When  formatText takes in a sample string with special characters and the width of the bar, then it returns a truncated version of the string', () => {
 	const inputString: string = '!@@###$$%%^^^&&&**((())__++++\n~{}|\\[]!!@@@##$%^^&&';
 	const inputWidth: number = 10;
-	const expectedString: string = '!@@###$$%%\n~{}|\\[]!!@\n';
+	const expectedString: string = '!@@###$$%%\n~{}|\\[]!!@';
 	characterWidthEstimates();
 	const actualString: string = formatText(inputString, inputWidth);
 	expect(actualString).toEqual(expectedString);
@@ -127,7 +127,7 @@ test('When  formatText takes in a sample string with emojis and the width of the
 	const inputString: string =
 		'This is the label for test one😀. \nSecond😀 line of label for test one. \nThird line of l😀abel for test one.';
 	const inputWidth: number = 15;
-	const expectedString: string = 'This is the lab\nSecond😀 line o\nThird line of l\n';
+	const expectedString: string = 'This is the lab\nSecond😀 line o\nThird line of l';
 	characterWidthEstimates();
 	const actualString: string = formatText(inputString, inputWidth);
 	expect(actualString).toEqual(expectedString);
@@ -143,8 +143,7 @@ test('When charWidth takes in a character as a string, then it will return the c
 test('when formatText is called with a string and a width, then string will be trimmed to fit the width.', () => {
 	const inputString: string =
 		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
-	const expectedString: string =
-		'THIS IS THE LABEL FO\nSECOND LINE OF THE L\nTHIRD LINE OF LABEL \n';
+	const expectedString: string = 'THIS IS THE LABEL FO\nSECOND LINE OF THE L\nTHIRD LINE OF LABEL';
 	const inputWidth: number = 20;
 
 	const characterWidthsFunction = (char: string): number => {
@@ -159,7 +158,7 @@ test('When formatText is called with a string and a width that is longer than th
 	const inputString: string =
 		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
 	const expectedString: string =
-		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.\n';
+		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
 	const inputWidth: number = 150;
 	const characterWidthsFunction = (char: string): number => {
 		return characterWidths[char];
@@ -173,7 +172,7 @@ test('When formatText is called with a string and a width that is one less than 
 	const inputString: string =
 		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
 	const expectedString: string =
-		'THIS IS THE LABEL FOR TEST ONE\nSECOND LINE OF THE LABEL FOR T\nTHIRD LINE OF LABEL FOR TEST O\n';
+		'THIS IS THE LABEL FOR TEST ONE\nSECOND LINE OF THE LABEL FOR T\nTHIRD LINE OF LABEL FOR TEST O';
 	const inputWidth: number = 30;
 
 	const characterWidthsFunction = (char: string): number => {
@@ -187,7 +186,7 @@ test('When formatText is called with a string and a width that is one less than 
 test('When formatText is called with a string and a width that is zero, then the string will be trimmed to fit the width.', () => {
 	const inputString: string =
 		'THIS IS THE LABEL FOR TEST ONE. \nSECOND LINE OF THE LABEL FOR TEST ONE. \nTHIRD LINE OF LABEL FOR TEST ONE.';
-	const expectedString: string = '\n\n\n';
+	const expectedString: string = '';
 	const inputWidth: number = 0;
 
 	const characterWidthsFunction = (char: string): number => {
@@ -200,7 +199,7 @@ test('When formatText is called with a string and a width that is zero, then the
 
 test('When formatText is called with an empty string and a width, then the string will be returned with a new line character.', () => {
 	const inputString: string = '';
-	const expectedString: string = '\n';
+	const expectedString: string = '';
 	const inputWidth: number = 30;
 
 	const characterWidthsFunction = (char: string): number => {

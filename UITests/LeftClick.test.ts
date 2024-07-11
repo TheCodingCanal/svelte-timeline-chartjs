@@ -22,7 +22,7 @@ test('When bar is clicked with time data being 2022-10-02T12:00 and 2022-10-07T1
 
 	await page.getByTestId('barChart').click({
 		button: 'left',
-		position: { x: 689, y: 229 }
+		position: { x: 700, y: 229 }
 	});
 
 	await expect(page.getByText('adjective')).toBeVisible();

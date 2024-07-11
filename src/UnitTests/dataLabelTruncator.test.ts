@@ -1,4 +1,4 @@
-import { characterWidthEstimates, formatText, charWidth } from '$lib/dataLabelTruncator';
+import { charWidth, characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
 import { describe, expect, it, test, vi } from 'vitest';
 
 const characterWidths: Record<string, number> = {
@@ -71,16 +71,6 @@ const characterWidths: Record<string, number> = {
 	' ': 1,
 	'.': 1
 };
-
-declare global {
-	namespace NodeJS {
-		interface Global {
-			document: Document;
-			window: Window;
-			navigator: Navigator;
-		}
-	}
-}
 
 describe('mockWindow', () => {
 	it('mocks the passed object', () => {

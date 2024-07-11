@@ -1,9 +1,11 @@
 import type { DateRange, XAxisTime } from '$lib/types';
-
+import 'chartjs-adapter-date-fns';
 function differenceBetweenDatesHours(timeInfo: DateRange) {
 	const timeMax: Date = timeInfo.max;
 	const timeMin: Date = timeInfo.min;
 	const timeDifferenceMilliseconds: number = timeMax.getTime() - timeMin.getTime();
+	console.log(timeInfo.min);
+	console.log(timeMax.getTime() - timeMin.getTime());
 	const timeDifferenceHours: number = timeDifferenceMilliseconds / (60000 * 60);
 	return timeDifferenceHours;
 }

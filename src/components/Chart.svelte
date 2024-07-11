@@ -11,6 +11,7 @@
 	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	import { Bar } from 'svelte-chartjs';
 	import { data } from '../lib/data';
+	import ModalSample from './ModalSample.svelte';
 	import TooltipText from './TooltipText.svelte';
 
 	let tooltipDataIndex: number = 0;
@@ -32,6 +33,8 @@
 	const updateLabelDebounce = debounce(updateLabelOnResize, 100);
 
 	let chartInstance: Bar;
+	let modalVisible: boolean = false;
+	let barLabel: string;
 	$: TimeData = XAxisAdjustment(DatedTime);
 
 	import {
@@ -95,6 +98,19 @@
 		else if (tooltip.caretX >= chart.chartArea.right) {
 			tooltipRight = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
 			tooltipLeft = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
+		}
+	}
+
+	function clickHandler(click: ChartEvent) {
+		console.log(click);
+		const points = chartInstance
+			.$capture_state()
+			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+		if (points[0]) {
+			const datasetIndex: number = points[0].datasetIndex;
+			const dataIndex: number = points[0].index;
+			barLabel = data.datasets[datasetIndex].data[dataIndex].label;
+			modalVisible = true;
 		}
 	}
 
@@ -168,6 +184,7 @@
 
 <Bar
 	style="position: relative; height:95vh; width:95vw"
+	data-testid="barChart"
 	bind:this={chartInstance}
 	{data}
 	options={{
@@ -207,7 +224,8 @@
 					style: 'normal'
 				}
 			}
-		}
+		},
+		onClick: clickHandler
 	}}
 	plugins={[ChartDataLabels]}
 />
@@ -221,3 +239,4 @@
 	opacity={tooltipOpacity}
 	right={tooltipRight}
 ></TooltipText>
+<ModalSample bind:showModal={modalVisible} label={barLabel}></ModalSample>

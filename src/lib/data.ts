@@ -185,7 +185,7 @@ export const data = {
 				{
 					x: ['2022-10-02', '2022-10-08'],
 					y: 'Ender',
-					label: ['Job 1234 - Part A', '500 total count', '98% efficient     300 good count'],
+					label: 'Job 1234 - Part A 500 total count 98% efficient 300 good count',
 					tooltip: [
 						`<style>tr:nth-child(even) {
 							background-color: gray;

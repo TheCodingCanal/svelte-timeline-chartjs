@@ -1,15 +1,16 @@
 import { DatedTime } from '../lib/TimeData';
 import { XAxisAdjustment } from '../lib/TimeLogic';
-import { characterWidthEstimates, formatText } from '../lib/dataLabelTruncator';
+import { characterWidthEstimates, formatText } from '../lib/DataLabelTruncator';
 import type { XAxisTime, anyObject } from '../lib/Types';
 import { Element as chartElement, ChartEvent } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
-import { data } from '../lib/data';
+import { data } from '../lib/Data';
 import { signal } from '@preact/signals';
 import { Signal } from '@preact/signals';
 import TooltipText from './TooltipText.tsx';
+import { useRef } from 'react';
 
 import {
 	BarElement,
@@ -45,13 +46,15 @@ export default function ChartComponent() {
 	const modalVisible: Signal<boolean> = signal(false);
 	const barLabel: Signal<string> = signal('');
 	const TimeData: Signal<XAxisTime> = signal(XAxisAdjustment(DatedTime));
+	const chartRef = useRef();
 
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
-	const externalTooltipHandler = (
-		this: TooltipModel<'bar'>,
-		context: { chart: Chart; tooltip: TooltipModel<'bar'> }
-	): void => {
+	const externalTooltipHandler = (context: {
+		chart: Chart;
+		tooltip: TooltipModel<'bar'>;
+	}): void => {
+		const chartInstance = chartRef.current;
 		const { chart, tooltip } = context;
 
 		if (tooltip.opacity === 0) {
@@ -71,8 +74,8 @@ export default function ChartComponent() {
 		//Flips tooltip up if in bottom half of the page.
 		if (tooltip.caretY > chart.chartArea.bottom / 2) {
 			tooltipTop.value = 0;
-			let tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
-			let pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
+			const tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
+			const pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
 			tooltipBottom.value = pageChartDelta + tooltipDelta;
 		}
 		//Flips tooltip to the left if it is too close to the left hand side of screen.
@@ -152,7 +155,7 @@ export default function ChartComponent() {
 							shownBarWidth = barWidth - (chart.chartArea.left - (barData.x - barWidth));
 						}
 
-						let dataLabelString = dataClone.datasets[datasetIndex].data[dataIndex].label;
+						const dataLabelString = dataClone.datasets[datasetIndex].data[dataIndex].label;
 						console.log(dataLabelString);
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
@@ -186,8 +189,8 @@ export default function ChartComponent() {
 			<Bar
 				style={{ position: 'relative', height: '95vh', width: '95vw' }}
 				data-testid="barChart"
-				bind:this={chartInstance}
-				{...data}
+				ref={chartRef}
+				data={data}
 				options={{
 					maintainAspectRatio: false,
 					onResize: updateLabelDebounce,

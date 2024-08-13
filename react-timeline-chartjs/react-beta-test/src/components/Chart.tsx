@@ -43,8 +43,10 @@ function externalTooltipHandler(
 
 	if (tooltip.opacity === 0) {
 		tooltipOpacity.value = 0;
+		console.log('hideTooltip');
 		return;
 	}
+	console.log('Tooltip');
 
 	tooltipDataIndex.value = tooltip.$context.tooltipItems[0].dataIndex;
 	tooltipDatasetIndex.value = tooltip.$context.tooltipItems[0].datasetIndex;

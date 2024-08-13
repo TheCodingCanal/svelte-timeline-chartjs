@@ -27,13 +27,13 @@ export default function TooltipText(tooltipInfo: tooltipData) {
 	const display: Signal<string> = signal('');
 	const justifyContent: Signal<string> = signal('');
 	const style: Signal<any> = signal({
-		left: `${tooltipInfo.left}px;`,
+		left: `${tooltipInfo.left}px`,
 		right: `${tooltipInfo.right}px`,
 		top: `${tooltipInfo.top}px`,
 		bottom: `${tooltipInfo.bottom}px`,
 		display: `${display}`,
 		justifyContent: `${justifyContent}`,
-		opacity: `${tooltipInfo.opacity};`
+		opacity: `${tooltipInfo.opacity}`
 	});
 
 	// style.value = `left: ${tooltipInfo.left}px; opacity: ${tooltipInfo.opacity};`;

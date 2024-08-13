@@ -39,7 +39,6 @@ function externalTooltipHandler(
 		tooltip: TooltipModel<'bar'>;
 	}
 ) {
-	useSignals();
 	const { chart, tooltip } = context;
 
 	if (tooltip.opacity === 0) {
@@ -104,58 +103,6 @@ export default function ChartComponent() {
 	const chartRef = useRef();
 
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
-
-	// const externalTooltipHandler = (context: {
-	// 	chart: Chart;
-	// 	tooltip: TooltipModel<'bar'>;
-	// }): void => {
-	// 	const chartInstance = chartRef.current;
-	// 	const { chart, tooltip } = context;
-
-	// 	if (tooltip.opacity === 0) {
-	// 		tooltipOpacity.value = 0;
-	// 		return;
-	// 	}
-
-	// 	tooltipDataIndex.value = tooltip.$context.tooltipItems[0].dataIndex;
-	// 	tooltipDatasetIndex.value = tooltip.$context.tooltipItems[0].datasetIndex;
-
-	// 	tooltipOpacity.value = 1;
-	// 	tooltipLeft.value = tooltip.caretX;
-	// 	tooltipTop.value = tooltip.caretY;
-	// 	tooltipBottom.value = 0;
-	// 	tooltipRight.value = 0;
-
-	// 	//Flips tooltip up if in bottom half of the page.
-	// 	if (tooltip.caretY > chart.chartArea.bottom / 2) {
-	// 		tooltipTop.value = 0;
-	// 		const tooltipDelta: number = chart.canvas.getBoundingClientRect().bottom - tooltip.caretY;
-	// 		const pageChartDelta: number = window.innerHeight - chart.canvas.getBoundingClientRect().bottom;
-	// 		tooltipBottom.value = pageChartDelta + tooltipDelta;
-	// 	}
-	// 	//Flips tooltip to the left if it is too close to the left hand side of screen.
-	// 	if (
-	// 		tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width <
-	// 			window.innerWidth / 4 &&
-	// 		tooltip.caretX > chart.chartArea.right / 2
-	// 	) {
-	// 		tooltipLeft.value = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-	// 	}
-	// 	//Flips tooltip to left side of bar if in right half of screen.
-	// 	else if (tooltip.caretX > chart.chartArea.right / 2 && tooltip.caretX < window.innerWidth) {
-	// 		tooltipRight.value = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
-	// 		tooltipLeft.value = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-	// 	}
-	// 	//When bar goes off of the left side of the screen tooltips left side will align with chart left.
-	// 	if (tooltip.$context.tooltip.dataPoints[0].element.base <= chart.chartArea.left) {
-	// 		tooltipLeft.value = chart.chartArea.left;
-	// 	}
-	// 	//When bar goes off of the right side of the screen the tooltip will flip to the left side.
-	// 	else if (tooltip.caretX >= chart.chartArea.right) {
-	// 		tooltipRight.value = tooltip.caretX + tooltip.$context.tooltip.dataPoints[0].element.width;
-	// 		tooltipLeft.value = tooltip.caretX - tooltip.$context.tooltip.dataPoints[0].element.width;
-	// 	}
-	// };
 
 	const clickHandler = (click: ChartEvent) => {
 		console.log(click);
@@ -290,13 +237,13 @@ export default function ChartComponent() {
 			/>
 			<TooltipText
 				{...data}
-				tooltipDataIndex={tooltipDataIndex.value}
-				tooltipDatasetIndex={tooltipDatasetIndex.value}
-				left={tooltipLeft.value}
-				top={tooltipTop.value}
-				bottom={tooltipBottom.value}
-				opacity={tooltipOpacity.value}
-				right={tooltipRight.value}
+				tooltipDataIndex={tooltipDataIndex}
+				tooltipDatasetIndex={tooltipDatasetIndex}
+				left={tooltipLeft}
+				top={tooltipTop}
+				bottom={tooltipBottom}
+				opacity={tooltipOpacity}
+				right={tooltipRight}
 			></TooltipText>
 			{/* <ModalSample bind:showModal={modalVisible} label={barLabel}></ModalSample> */}
 		</div>

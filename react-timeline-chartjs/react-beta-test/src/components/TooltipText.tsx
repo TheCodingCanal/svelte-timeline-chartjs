@@ -2,6 +2,7 @@ import type { ChartData } from '../lib/Types';
 import { signal } from '@preact/signals-react';
 import { Signal } from '@preact/signals-react';
 import { data } from '../lib/Data';
+import { useSignals } from '@preact/signals-react/runtime';
 
 // const data: ChartData = signal();
 // const tooltipDataIndex: Signal<number> = signal(0);
@@ -13,15 +14,16 @@ import { data } from '../lib/Data';
 // const opacity: Signal<number> = signal(0);
 
 type tooltipData = {
-	tooltipDataIndex: number;
-	tooltipDatasetIndex: number;
-	left: number;
-	top: number;
-	bottom: number;
-	right: number;
-	opacity: number;
+	tooltipDataIndex: Signal<number>;
+	tooltipDatasetIndex: Signal<number>;
+	left: Signal<number>;
+	top: Signal<number>;
+	bottom: Signal<number>;
+	right: Signal<number>;
+	opacity: Signal<number>;
 };
 export default function TooltipText(tooltipInfo: tooltipData) {
+	useSignals();
 	const display: Signal<string> = signal('');
 	const justifyContent: Signal<string> = signal('');
 	const style: Signal<any> = signal({
@@ -36,15 +38,15 @@ export default function TooltipText(tooltipInfo: tooltipData) {
 
 	// style.value = `left: ${tooltipInfo.left}px; opacity: ${tooltipInfo.opacity};`;
 	// style = ` opacity: ${opacity};`;
-	if (tooltipInfo.bottom !== 0) {
+	if (tooltipInfo.bottom.value !== 0) {
 		// style.value += `bottom: ${tooltipInfo.bottom}px;`;
 		style.value.bottom = `${tooltipInfo.bottom}px`;
 	}
-	if (tooltipInfo.bottom == 0) {
+	if (tooltipInfo.bottom.value == 0) {
 		// style.value += `top: ${top}px;`;
 		style.value.top = `${tooltipInfo.top}px`;
 	}
-	if (tooltipInfo.right !== 0) {
+	if (tooltipInfo.right.value !== 0) {
 		// style += `left: ${left}px;`
 		style.value.left = `${tooltipInfo.left}px`;
 		// style.value += `right: ${tooltipInfo.right}px;`;
@@ -56,7 +58,8 @@ export default function TooltipText(tooltipInfo: tooltipData) {
 	}
 
 	const convertToHtml =
-		data.datasets[tooltipInfo.tooltipDatasetIndex].data[tooltipInfo.tooltipDataIndex].tooltip;
+		data.datasets[tooltipInfo.tooltipDatasetIndex.value].data[tooltipInfo.tooltipDataIndex.value]
+			.tooltip;
 	const dangerousHtml = { __html: `${convertToHtml}` };
 	return (
 		<div

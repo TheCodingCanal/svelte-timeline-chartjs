@@ -1,6 +1,6 @@
 import type { ChartData } from '../lib/Types';
-import { signal } from '@preact/signals';
-import { Signal } from '@preact/signals';
+import { signal } from '@preact/signals-react';
+import { Signal } from '@preact/signals-react';
 import { data } from '../lib/Data';
 
 // const data: ChartData = signal();

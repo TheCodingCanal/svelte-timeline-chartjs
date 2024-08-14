@@ -252,7 +252,7 @@ export default function ChartComponent() {
 				opacity={tooltipOpacity}
 				right={tooltipRight}
 			></TooltipText>
-			<Modal show={modalVisible} children={barLabel.value}></Modal>
+			<Modal show={modalVisible} children={barLabel}></Modal>
 		</div>
 	);
 }

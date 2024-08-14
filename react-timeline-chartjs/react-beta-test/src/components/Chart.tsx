@@ -10,7 +10,7 @@ import { data } from '../lib/Data';
 import { signal } from '@preact/signals-react';
 import { Signal } from '@preact/signals-react';
 import TooltipText from './TooltipText.tsx';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import Modal from './Modal';
 
 import {
@@ -97,7 +97,6 @@ export default function ChartComponent() {
 
 	const dataClone = structuredClone(data);
 
-	let chartInstance: Bar;
 	const modalVisible: Signal<boolean> = signal(false);
 	const barLabel: Signal<string> = signal('');
 	const TimeData: Signal<XAxisTime> = signal(XAxisAdjustment(DatedTime));
@@ -253,11 +252,7 @@ export default function ChartComponent() {
 				opacity={tooltipOpacity}
 				right={tooltipRight}
 			></TooltipText>
-			<Modal>
-				{modalVisible}
-				{closeModal}
-				{barLabel}
-			</Modal>
+			<Modal show={modalVisible} children={barLabel.value}></Modal>
 		</div>
 	);
 }

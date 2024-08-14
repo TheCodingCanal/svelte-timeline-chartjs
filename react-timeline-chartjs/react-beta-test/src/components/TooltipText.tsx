@@ -39,8 +39,6 @@ export default function TooltipText(tooltipInfo: tooltipData) {
 	style.value.top = 'auto';
 	style.value.bottom = 'auto';
 
-	// console.log(style.value.top, style.value.bottom);
-
 	if (tooltipInfo.bottom.value !== 0) {
 		style.value.bottom = `${tooltipInfo.bottom}px`;
 	}

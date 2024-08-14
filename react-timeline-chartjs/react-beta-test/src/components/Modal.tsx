@@ -1,19 +1,33 @@
-import { signal } from '@preact/signals-react';
+// import { signal } from '@preact/signals-react';
 import { Signal } from '@preact/signals-react';
+import { useSignals } from '@preact/signals-react/runtime';
 
-export default function Modal(show: Signal<boolean>, onClose: Function, children: string) {
-	if (!show.value) {
-		return null;
+type modalData = {
+	show: Signal<boolean>;
+	children: string;
+};
+export default function Modal(modalInfo: modalData) {
+	useSignals();
+	const dialog = document.querySelector('dialog');
+
+	if (modalInfo.show.value && dialog) {
+		dialog.showModal();
+	} else {
+		dialog?.close();
 	}
 
 	return (
-		<div className="modal-overlay">
-			<div className="modal-content">
-				<button className="modal-close" onClick={onClose}>
-					&times;
-				</button>
-				{children}
-			</div>
-		</div>
+		<dialog>
+			<p>{modalInfo.children}</p>
+			<p>Insert pretty picture</p>
+			<button
+				onClick={() => {
+					dialog?.close();
+				}}
+			>
+				Close modal
+			</button>
+			<p>Sorry, you can't login.</p>
+		</dialog>
 	);
 }

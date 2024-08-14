@@ -16,10 +16,10 @@ import { useSignals } from '@preact/signals-react/runtime';
 type tooltipData = {
 	tooltipDataIndex: Signal<number>;
 	tooltipDatasetIndex: Signal<number>;
-	left: Signal<number>;
-	top: Signal<number>;
-	bottom: Signal<number>;
-	right: Signal<number>;
+	left: Signal<number | string>;
+	top: Signal<number | string>;
+	bottom: Signal<number | string>;
+	right: Signal<number | string>;
 	opacity: Signal<number>;
 };
 export default function TooltipText(tooltipInfo: tooltipData) {
@@ -36,25 +36,24 @@ export default function TooltipText(tooltipInfo: tooltipData) {
 		opacity: `${tooltipInfo.opacity}`
 	});
 
-	// style.value = `left: ${tooltipInfo.left}px; opacity: ${tooltipInfo.opacity};`;
-	// style = ` opacity: ${opacity};`;
+	style.value.top = 'auto';
+	style.value.bottom = 'auto';
+
+	// console.log(style.value.top, style.value.bottom);
+
 	if (tooltipInfo.bottom.value !== 0) {
-		// style.value += `bottom: ${tooltipInfo.bottom}px;`;
 		style.value.bottom = `${tooltipInfo.bottom}px`;
 	}
 	if (tooltipInfo.bottom.value == 0) {
-		// style.value += `top: ${top}px;`;
 		style.value.top = `${tooltipInfo.top}px`;
 	}
 	if (tooltipInfo.right.value !== 0) {
-		// style += `left: ${left}px;`
 		style.value.left = `${tooltipInfo.left}px`;
-		// style.value += `right: ${tooltipInfo.right}px;`;
+
 		style.value.right = `${tooltipInfo.right}px`;
-		// style.value += 'display: flex; justify-content: flex-end;';
+
 		style.value.display = 'flex';
 		style.value.justifyContent = 'flex-end';
-		// console.log('right', tooltipInfo.right);
 	}
 
 	const convertToHtml =

@@ -9,9 +9,9 @@ import { Bar } from 'react-chartjs-2';
 import { data } from '../lib/Data';
 import { signal } from '@preact/signals-react';
 import { Signal } from '@preact/signals-react';
-import { useSignals } from '@preact/signals-react/runtime';
 import TooltipText from './TooltipText.tsx';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import Modal from './Modal';
 
 import {
 	BarElement,
@@ -46,7 +46,6 @@ function externalTooltipHandler(
 		console.log('hideTooltip');
 		return;
 	}
-	console.log('Tooltip');
 
 	tooltipDataIndex.value = tooltip.$context.tooltipItems[0].dataIndex;
 	tooltipDatasetIndex.value = tooltip.$context.tooltipItems[0].datasetIndex;
@@ -102,21 +101,28 @@ export default function ChartComponent() {
 	const modalVisible: Signal<boolean> = signal(false);
 	const barLabel: Signal<string> = signal('');
 	const TimeData: Signal<XAxisTime> = signal(XAxisAdjustment(DatedTime));
-	const chartRef = useRef();
+	const chartRef = useRef<Bar>(null);
 
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const clickHandler = (click: ChartEvent) => {
-		console.log(click);
-		const points = chartInstance
-			.$capture_state()
-			.chart.getElementsAtEventForMode(click, 'nearest', { intersect: true }, true);
+		console.log(chartRef.current);
+		const points = chartRef.current.getElementsAtEventForMode(
+			click,
+			'nearest',
+			{ intersect: true },
+			true
+		);
 		if (points[0]) {
 			const datasetIndex: number = points[0].datasetIndex;
 			const dataIndex: number = points[0].index;
 			barLabel.value = data.datasets[datasetIndex].data[dataIndex].label;
 			modalVisible.value = true;
 		}
+	};
+
+	const closeModal = () => {
+		modalVisible.value = false;
 	};
 
 	const updateLabel = (chart: Chart) => {
@@ -247,7 +253,11 @@ export default function ChartComponent() {
 				opacity={tooltipOpacity}
 				right={tooltipRight}
 			></TooltipText>
-			{/* <ModalSample bind:showModal={modalVisible} label={barLabel}></ModalSample> */}
+			<Modal>
+				{modalVisible}
+				{closeModal}
+				{barLabel}
+			</Modal>
 		</div>
 	);
 }

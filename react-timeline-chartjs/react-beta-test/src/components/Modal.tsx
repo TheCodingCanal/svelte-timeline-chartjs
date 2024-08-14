@@ -19,6 +19,7 @@ export default function Modal(modalInfo: modalData) {
 	return (
 		<dialog>
 			<p>{modalInfo.children.value}</p>
+			<p>adjective</p>
 			<button
 				onClick={() => {
 					dialog?.close();

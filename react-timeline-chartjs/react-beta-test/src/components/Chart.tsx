@@ -43,7 +43,6 @@ function externalTooltipHandler(
 
 	if (tooltip.opacity === 0) {
 		tooltipOpacity.value = 0;
-		console.log('hideTooltip');
 		return;
 	}
 
@@ -100,12 +99,14 @@ export default function ChartComponent() {
 	const modalVisible: Signal<boolean> = signal(false);
 	const barLabel: Signal<string> = signal('');
 	const TimeData: Signal<XAxisTime> = signal(XAxisAdjustment(DatedTime));
-	const chartRef = useRef<Bar>(null);
+	const chartRef = useRef<typeof Bar>(null);
 
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, TimeScale);
 
 	const clickHandler = (click: ChartEvent) => {
-		console.log(chartRef.current);
+		if (chartRef.current === null) {
+			return;
+		}
 		const points = chartRef.current.getElementsAtEventForMode(
 			click,
 			'nearest',
@@ -165,7 +166,6 @@ export default function ChartComponent() {
 						}
 
 						const dataLabelString = dataClone.datasets[datasetIndex].data[dataIndex].label;
-						console.log(dataLabelString);
 						chart.data.datasets[datasetIndex].data[dataIndex].label = formatText(
 							dataLabelString,
 							shownBarWidth

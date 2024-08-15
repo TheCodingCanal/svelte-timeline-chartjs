@@ -1,4 +1,4 @@
-import type { DateRange } from '$lib/types';
+import type { DateRange } from './Types';
 
 export const DatedTime: DateRange = {
 	min: new Date('2022-10-02T12:00'),

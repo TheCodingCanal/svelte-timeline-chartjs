@@ -1,5 +1,5 @@
-import { XAxisAdjustment } from '$lib/TimeLogic';
-import type { DateRange, XAxisTime } from '$lib/types';
+import { XAxisAdjustment } from '../lib/TimeLogic';
+import type { DateRange, XAxisTime } from '../lib/Types';
 import { expect, test } from 'vitest';
 
 test('takes in 2022-10-01T12:00 and 2022-10-01T13:00 and returns XAxisTime.unit = "minute" and XAxisTime.step = 15', () => {

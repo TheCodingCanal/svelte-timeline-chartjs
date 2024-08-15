@@ -1,4 +1,4 @@
-import { charWidth, characterWidthEstimates, formatText } from '$lib/dataLabelTruncator';
+import { charWidth, characterWidthEstimates, formatText } from '../lib/dataLabelTruncator';
 import { describe, expect, it, test, vi } from 'vitest';
 
 const characterWidths: Record<string, number> = {

@@ -1,4 +1,4 @@
-import type { DateRange, XAxisTime } from '$lib/types';
+import type { DateRange, XAxisTime } from './Types';
 import 'chartjs-adapter-date-fns';
 function differenceBetweenDatesHours(timeInfo: DateRange) {
 	const timeMax: Date = timeInfo.max;

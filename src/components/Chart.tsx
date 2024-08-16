@@ -120,10 +120,6 @@ export default function ChartComponent() {
 		}
 	};
 
-	const closeModal = () => {
-		modalVisible.value = false;
-	};
-
 	const updateLabel = (chart: Chart) => {
 		characterWidthEstimates();
 		if (chart) {

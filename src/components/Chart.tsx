@@ -1,17 +1,16 @@
-import { DatedTime } from '../lib/TimeData.ts';
-import { XAxisAdjustment } from '../lib/TimeLogic.ts';
-import { characterWidthEstimates, formatText } from '../lib/DataLabelTruncator.ts';
-import type { XAxisTime, anyObject } from '../lib/Types.ts';
-import { Element as chartElement, ChartEvent } from 'chart.js';
+import { Signal, signal } from '@preact/signals-react';
+import { ChartEvent, Element as chartElement } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { useRef } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { data } from '../lib/Data.ts';
-import { signal } from '@preact/signals-react';
-import { Signal } from '@preact/signals-react';
-import TooltipText from './TooltipText.tsx';
-import { useRef } from 'react';
+import { characterWidthEstimates, formatText } from '../lib/DataLabelTruncator.ts';
+import { DatedTime } from '../lib/TimeData.ts';
+import { XAxisAdjustment } from '../lib/TimeLogic.ts';
+import type { XAxisTime, anyObject } from '../lib/Types.ts';
 import Modal from './Modal.tsx';
+import TooltipText from './TooltipText.tsx';
 
 import {
 	BarElement,

@@ -1,5 +1,5 @@
-import { charWidth, characterWidthEstimates, formatText } from '../lib/dataLabelTruncator';
 import { describe, expect, it, test, vi } from 'vitest';
+import { charWidth, characterWidthEstimates, formatText } from '../lib/DataLabelTruncator';
 
 const characterWidths: Record<string, number> = {
 	A: 1,

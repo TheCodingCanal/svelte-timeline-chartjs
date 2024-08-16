@@ -1,17 +1,7 @@
-import type { ChartData } from '../lib/Types';
 import { signal } from '@preact/signals-react';
 import { Signal } from '@preact/signals-react';
 import { data } from '../lib/Data';
 import { useSignals } from '@preact/signals-react/runtime';
-
-// const data: ChartData = signal();
-// const tooltipDataIndex: Signal<number> = signal(0);
-// const tooltipDatasetIndex: Signal<number> = signal(0);
-// const left: Signal<number> = signal(0);
-// const top: Signal<number> = signal(0);
-// const bottom: Signal<number> = signal(0);
-// const right: Signal<number> = signal(0);
-// const opacity: Signal<number> = signal(0);
 
 type tooltipData = {
 	tooltipDataIndex: Signal<number>;

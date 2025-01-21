@@ -217,6 +217,11 @@ export default function ChartComponent() {
 						}
 					},
 					plugins: {
+						dragData: {
+							onDragStart: (event: MouseEvent) => {
+								console.log(event);
+							}
+						},
 						tooltip: {
 							enabled: false,
 							position: 'nearest',
@@ -232,8 +237,7 @@ export default function ChartComponent() {
 								style: 'normal'
 							}
 						}
-					},
-					onClick: clickHandler
+					}
 				}}
 				plugins={[ChartDataLabels]}
 			/>
